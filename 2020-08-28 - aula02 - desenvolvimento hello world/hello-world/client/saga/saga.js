@@ -17,11 +17,14 @@ function* get() {
 
 function* post() {
   try {
-    const requisicao = yield call(postTeste);
+    const objetoInserido = yield call(postTeste);
+    console.log(objetoInserido);
+
+    const novaLista = yield call(getTeste);
 
     yield put({
       type: "display/listaObjetos",
-      listaObjetos: requisicao,
+      listaObjetos: novaLista,
     });
   } catch (e) {
     Alert.alert("Erro", e.toString());
