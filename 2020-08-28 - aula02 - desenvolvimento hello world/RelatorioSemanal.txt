@@ -1,0 +1,11 @@
+Relatório semanal
+
+Relatar O QUE FOI FEITO:
+-Desenvolvimento e configuração do ambiente de backend
+-Desenvolvimento e configuração do ambiente frontend
+-Busca de trabalhos correlatos
+
+Relatar QUEM FOI O RESPONSÁVEL
+-Caroline
+-Heitor
+-Otávio
