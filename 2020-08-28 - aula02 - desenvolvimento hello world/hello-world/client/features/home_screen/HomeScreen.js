@@ -6,14 +6,29 @@ import { connect } from "react-redux";
 const HomeScreen = (props) => {
   return (
     <View style={homeStyle.container}>
-      <Text style={homeStyle.text}>{props.textValue}</Text>
+      {props.listaObjetos.map((item) => {
+        return (
+          <View key={item.id}>
+            <Text>ID: {item.id}</Text>
+            <Text>Text: {item.text}</Text>
+          </View>
+        );
+      })}
       <Button
         title="Fazer Requisição"
         style={homeStyle.btn}
         onPress={() =>
           props.dispatch({
-            type: "display/textApi",
-            textValue: "Texto Atualizado",
+            type: "api/get",
+          })
+        }
+      />
+      <Button
+        title="Fazer Post"
+        style={homeStyle.btn}
+        onPress={() =>
+          props.dispatch({
+            type: "api/post",
           })
         }
       />
@@ -23,7 +38,7 @@ const HomeScreen = (props) => {
 
 const mapHomeToProps = (state) => {
   return {
-    textValue: state.textValue,
+    listaObjetos: state.listaObjetos,
   };
 };
 

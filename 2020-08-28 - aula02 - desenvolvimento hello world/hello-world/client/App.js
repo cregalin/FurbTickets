@@ -6,8 +6,12 @@ import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { Provider } from "react-redux";
 import reducer from "./reducers/TicketReducer";
+import mySaga from "./saga/saga";
 
-const store = createStore(reducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(mySaga);
 
 export default function App() {
   return (
@@ -23,7 +27,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -1,15 +1,14 @@
 export default function reducer(
   state = {
-    textValue:
-      "Bem-Vindo ao app. Clique no botão acima para fazer uma requisição!",
+    listaObjetos: [],
   },
   action
 ) {
   switch (action.type) {
-    case "display/textApi":
+    case "display/listaObjetos":
       return {
         ...state,
-        textValue: action.textValue,
+        listaObjetos: action.listaObjetos,
       };
     default:
       return state;
