@@ -13,10 +13,10 @@ const PrimaryButton = (props) => {
 const buttonStyle = StyleSheet.create({
   btnContainer: {
     backgroundColor: "#474554",
-    borderRadius: "5px",
-    padding: "10px",
-    width: "200px",
-    margin: "10px",
+    borderRadius: 5,
+    padding: 10,
+    width: 200,
+    margin: 10,
   },
   btnLabel: {
     color: "white",
