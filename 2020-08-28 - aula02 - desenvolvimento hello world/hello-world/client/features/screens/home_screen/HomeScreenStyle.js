@@ -1,13 +1,11 @@
 import { StyleSheet } from "react-native";
 
-export const HomeScreenStyle = StyleSheet.create({
+export const homeScreenStyle = StyleSheet.create({
   container: {
-    width: "80%",
-    padding: 30,
-    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    height: "100%",
   },
   text: {
     color: "white",
