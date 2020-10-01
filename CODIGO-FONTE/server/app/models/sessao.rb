@@ -1,2 +1,0 @@
-class Sessao < ApplicationRecord
-end
