@@ -9,11 +9,11 @@ class ShowsController < ApplicationController
       .by_session_time(params[:time_from], params[:time_to])
       .by_session_date(params[:date_from], params[:date_to])
 
-    render json: @shows
+    render "shows/index.json"
   end
 
   def show
-    render json: @show
+    render json: { show: @show, sessions_attributes: @show.sessions }
   end
 
   def create
@@ -40,7 +40,7 @@ class ShowsController < ApplicationController
 
   private
     def set_show
-      @show = Show.find(params[:id])
+      @show = Show.joins(:sessions).find(params[:id])
     end
 
     def show_params
