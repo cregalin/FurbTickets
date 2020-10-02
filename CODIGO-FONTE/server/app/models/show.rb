@@ -18,10 +18,10 @@ class Show < ApplicationRecord
   }
 
   scope :by_session_time, -> (time_from, time_to) {
-    joins(:sessions).where(sessions: { time: time_from..time_to }).distinct if time_from.present? && time_to.present?
+    where(sessions: { time: time_from..time_to }).distinct if time_from.present? && time_to.present?
   }
 
   scope :by_session_date, -> (date_from, date_to) {
-    joins(:sessions).where(sessions: { date: date_from..date_to }).distinct if date_from.present? && date_to.present?
+    where(sessions: { date: date_from..date_to }).distinct if date_from.present? && date_to.present?
   }
 end
