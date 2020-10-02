@@ -1,14 +1,14 @@
 import React from "react";
 import { View } from "react-native";
-import { homeScreenStyle } from "./HomeScreenStyle";
 import { connect } from "react-redux";
 import PrimaryButton from "../../components/buttons/primary_button/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
+import { Container } from "../../components/containers/styles";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   return (
-    <View style={homeScreenStyle.container}>
+    <Container>
       <PrimaryButton
         label={"Cadastrar Espetáculos"}
         onPress={() => navigation.navigate("Cadastrar")}
@@ -17,7 +17,7 @@ const HomeScreen = () => {
         label={"Buscar Espetáculos"}
         onPress={() => navigation.navigate("Buscar")}
       />
-    </View>
+    </Container>
   );
 };
 
