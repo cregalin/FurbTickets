@@ -1,10 +1,12 @@
 import React from "react";
-import { View, Alert } from "react-native";
+import { View } from "react-native";
 import { homeScreenStyle } from "./HomeScreenStyle";
 import { connect } from "react-redux";
-import PrimaryButton from "../../components/buttons/Button";
+import PrimaryButton from "../../components/buttons/primary_button/PrimaryButton";
+import { useNavigation } from "@react-navigation/native";
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={homeScreenStyle.container}>
       <PrimaryButton

@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ButtonContainer } from "./styles";
 
 const PrimaryButton = (props) => {
   return (
-    <TouchableOpacity style={buttonStyle.btnContainer} onPress={props.onPress}>
+    <ButtonContainer onPress={props.onPress}>
       <Text style={buttonStyle.btnLabel}>{props.label}</Text>
-    </TouchableOpacity>
+    </ButtonContainer>
   );
 };
 
