@@ -4,8 +4,10 @@ import StyledTextInput from "../../components/inputs/text_input/TextInput";
 import { Container } from "../../components/containers/styles";
 import { darkPurple, xanadu } from "../../theme/colors";
 import PrimaryButton from "../../components/buttons/primary_button/PrimaryButton";
+import { useNavigation } from "@react-navigation/native";
 
 const CadastrarScreen = () => {
+  const navigation = useNavigation();
   return (
     <Container justifyContent="flex-start">
       <StyledTextInput
@@ -29,7 +31,12 @@ const CadastrarScreen = () => {
         onChangeText={() => {}}
         keyboardType="numeric"
       />
-      <PrimaryButton label="Cadastrar" onPress={() => {}} />
+      <PrimaryButton
+        label="Cadastrar"
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      />
     </Container>
   );
   d;
