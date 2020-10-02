@@ -26,17 +26,20 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{ title: "FITUB" }}
+            options={{ title: "FITUB", headerTitleAlign: "center" }}
           />
           <Stack.Screen
             name="Buscar"
             component={BuscarScreen}
-            options={{ title: "Buscar Espetáculo" }}
+            options={{ title: "Buscar Espetáculo", headerTitleAlign: "right" }}
           />
           <Stack.Screen
             name="Cadastrar"
             component={CadastrarScreen}
-            options={{ title: "Cadastrar Espetáculo" }}
+            options={{
+              title: "Cadastrar Espetáculo",
+              headerTitleAlign: "right",
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
