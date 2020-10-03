@@ -1,44 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
+import * as S from './styles'
 import { connect } from "react-redux";
 import mock from "./SpectaclesMock";
-import Spectacle from "../../components/Spectacle";
+import Spectacle from "../../components/Spectacle/Spectacle";
 
 const BuscarScreen = () => {
   const [query, setQuery] = useState("");
   // const [spectacles, setSpectacles] = useState([])
   const [spectacles, setSpectacles] = useState(mock);
+  const [filteredSpectacles, setFilteredSpectacles] = useState([])
+
+  useEffect(() => {
+    setFilteredSpectacles(spectacles.filter(spectacle => spectacle.title.toUpperCase().includes(query.toUpperCase())))
+  }, [query, spectacles])
 
   return (
-    <View style={styles.container}>
+    <S.Container style={styles.container}>
       <Text>Busque espetáculos.</Text>
-      <TextInput
+      <S.Input
         style={styles.input}
         onChangeText={(text) => setQuery(text)}
-      ></TextInput>
+      >
       <ScrollView>
-        {spectacles.map((spectacle) => (
+        {filteredSpectacles.map((spectacle) => (
           <Spectacle spectacle={spectacle} />
         ))}
       </ScrollView>
-    </View>
+    </S.Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-  },
-  input: {
-    height: 30,
-    backgroundColor: "white",
-    marginBottom: 10,
-    marginTop: 10,
-    borderRadius: 5,
-    borderLeftWidth: 2,
-    borderLeftColor: "blue",
-    paddingLeft: 5,
-  },
-});
 
 export default BuscarScreen;
