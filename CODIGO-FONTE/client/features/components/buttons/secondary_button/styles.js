@@ -9,4 +9,5 @@ export const ButtonContainer = styled.TouchableOpacity`
   border-radius: 30px;
   justify-content: center;
   align-items: center;
+  margin: 10px;
 `;
