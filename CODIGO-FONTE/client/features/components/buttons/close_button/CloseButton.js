@@ -1,12 +1,12 @@
 import React from "react";
 import { ButtonContainer } from "./styles";
 import { StyledText } from "../../texts/styles";
-import { white } from "../../../theme/colors";
+import { electricPurple } from "../../../theme/colors";
 
 const CloseButton = (props) => {
   return (
     <ButtonContainer onPress={() => props.onPress()}>
-      <StyledText fontSize={20} fontColor={white} fontWeight="bold">
+      <StyledText fontSize={20} fontColor={electricPurple} fontWeight="bold">
         x
       </StyledText>
     </ButtonContainer>
