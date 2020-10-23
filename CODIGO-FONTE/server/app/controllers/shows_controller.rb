@@ -3,6 +3,7 @@ class ShowsController < ApplicationController
 
   def index
     @shows = Show
+      .joins(:sessions)
       .by_title(params[:title])
       .by_description(params[:description])
       .by_troupe(params[:troupe])
