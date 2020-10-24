@@ -9,3 +9,13 @@ Relatar O QUE FOI FEITO:
 Relatar QUEM FOI O RESPONSÁVEL
 - Caroline Regalin
 - Otávio
+
+
+2020-10-23 - desenvolvimento do projeto
+Relatar O QUE FOI FEITO:
+- Cricao models e ontroller salas. Correção de bugs nas sessões.
+- Tela filtro espetáculos
+
+Relatar QUEM FOI O RESPONSÁVEL
+- Caroline Regalin
+- Otávio
