@@ -3,6 +3,8 @@ class ShowsController < ApplicationController
 
   def index
     @shows = Show
+      .select('shows.id, shows.title, shows.description, shows.price, shows.troupe, sessions.id session_id, sessions.date session_date, sessions.time session_time')
+      .joins(:sessions)
       .by_title(params[:title])
       .by_description(params[:description])
       .by_troupe(params[:troupe])

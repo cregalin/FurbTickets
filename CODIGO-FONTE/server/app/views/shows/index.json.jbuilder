@@ -4,9 +4,7 @@ json.data @shows do |show|
   json.description show.description
   json.price show.price
   json.troupe show.troupe
-  json.session_attributes show.sessions do |session|
-    json.id session.id
-    json.date session.date
-    json.time session.time
-  end
+  json.session_id show.session_id
+  json.session_date show.session_date
+  json.session_time show.session_time.strftime('%H:%M')
 end

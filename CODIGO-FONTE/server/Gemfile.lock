@@ -43,6 +43,8 @@ GEM
     byebug (11.0.1)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    enumerize (0.8.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     ffi (1.13.1)
     globalid (0.4.2)
@@ -123,6 +125,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  enumerize
   jbuilder
   listen (~> 3.0.5)
   mysql2 (>= 0.3.18, < 0.6.0)
