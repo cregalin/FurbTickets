@@ -6,6 +6,7 @@ export const StyledText = styled.Text`
   color: ${(props) => (props.fontColor ? props.fontColor : xanadu)};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "normal")};
   text-align: ${(props) => (props.textAlign ? props.textAlign : "left")};
+  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : 0)}px;
 `;
 
 export const Title = styled.Text`

@@ -1,3 +1,11 @@
+const axios = require("axios");
+
+const fitubServer = axios.create({
+  baseUrl: "http://11a8b7c7eea5.ngrok.io",
+  timeout: 1000,
+  headers: { Accept: "application/json", "Content-Type": "application/json" },
+});
+
 /**
  * @summary Funcao de teste para consumo do back-end
  */

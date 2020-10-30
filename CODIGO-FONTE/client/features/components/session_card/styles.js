@@ -7,6 +7,7 @@ export const CardContainer = styled.View`
   margin-bottom: 5px;
   border-width: 1px;
   border-radius: 5px;
+  align-items: center;
 `;
 
 export const FieldContainer = styled.View`

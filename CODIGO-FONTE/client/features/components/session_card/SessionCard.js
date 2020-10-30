@@ -2,6 +2,7 @@ import React from "react";
 import { CardContainer, FieldContainer } from "./styles";
 import { StyledText } from "../../components/texts/styles";
 import { darkPurple } from "../../theme/colors";
+import SecondaryButton from "../buttons/secondary_button/SecondaryButton";
 
 const SessionCard = (props) => {
   return (
@@ -22,6 +23,7 @@ const SessionCard = (props) => {
         <StyledText fontWeight="bold">Hora:</StyledText>
         <StyledText fontColor={darkPurple}>15:45</StyledText>
       </FieldContainer>
+      <SecondaryButton label="Remover" />
     </CardContainer>
   );
 };
