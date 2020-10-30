@@ -5,12 +5,16 @@ class RoomsController < ApplicationController
     @rooms = Room.all
   end
 
-
   def show
   end
 
   def create
-    @room = Room.new(room_params.merge({ chairs_attributes:  JSON.parse(File.read("#{ Rails.public_path }/chairs.json"))}))
+    # TODO: Melhorar isso aqui, abstrair, tá feio
+    if room_params[:room_id] === 1
+      @room = Room.new(room_params.merge({ chairs_attributes:  JSON.parse(File.read("#{ Rails.public_path }/chairs.json"))}))
+    else
+      @room = Room.new(room_params)
+    end
 
     if @room.save
       render :show, status: :created, location: @room
