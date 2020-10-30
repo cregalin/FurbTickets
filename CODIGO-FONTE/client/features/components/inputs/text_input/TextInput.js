@@ -1,16 +1,21 @@
 import React from "react";
-import { InputContainer, InputComponent } from "./styles";
+import { Controller } from "react-hook-form";
+
+import { InputComponent, InputContainer } from "./styles";
 
 const StyledTextInput = (props) => {
   return (
     <InputContainer>
-      <InputComponent
+      <Controller
+        as={InputComponent}
+        control={props.control}
+        name={props.name}
+        rules={{ required: props.required ? props.required : false }}
+        onChangeText={(text) => props.onChangeText(text)}
         placeholder={props.placeholder ? props.placeholder : ""}
         placeholderTextColor={
-          props.placeholderColor ? props.placeholderColor : "gray"
+          props.placeholderColor ? props.placeholderColor : "black"
         }
-        onChangeText={props.onChangeText ? props.onChangeText() : null}
-        keyboardType={props.keyboardType ? props.keyboardType : "default"}
       />
     </InputContainer>
   );

@@ -5,9 +5,9 @@ import { white } from "../../../theme/colors";
 
 const SecondaryButton = (props) => {
   return (
-    <ButtonContainer onPress={() => props.onPress()}>
+    <ButtonContainer onPress={() => (props.onPress ? props.onPress() : null)}>
       <StyledText
-        fontSize={40}
+        fontSize={14}
         textAlign={"center"}
         fontColor={white}
         fontWeight="bold"
