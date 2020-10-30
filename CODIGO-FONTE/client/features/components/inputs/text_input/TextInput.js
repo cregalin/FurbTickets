@@ -9,7 +9,7 @@ const StyledTextInput = (props) => {
         placeholderTextColor={
           props.placeholderColor ? props.placeholderColor : "gray"
         }
-        onChangeText={props.onChangeText ? props.onChangeText() : null}
+        onChangeText={props.onChangeText ? props.onChangeText : null}
         keyboardType={props.keyboardType ? props.keyboardType : "default"}
       />
     </InputContainer>
