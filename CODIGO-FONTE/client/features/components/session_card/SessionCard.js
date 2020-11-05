@@ -13,17 +13,20 @@ const SessionCard = (props) => {
         fontSize={20}
         fontColor={darkPurple}
       >
-        Sessão 1
+        Sessão {props.index + 1}
       </StyledText>
       <FieldContainer>
         <StyledText fontWeight="bold">Data:</StyledText>
-        <StyledText fontColor={darkPurple}>02/10/2020</StyledText>
+        <StyledText fontColor={darkPurple}>{props.date}</StyledText>
       </FieldContainer>
       <FieldContainer>
         <StyledText fontWeight="bold">Hora:</StyledText>
-        <StyledText fontColor={darkPurple}>15:45</StyledText>
+        <StyledText fontColor={darkPurple}>{props.time}</StyledText>
       </FieldContainer>
-      <SecondaryButton label="Remover" />
+      <SecondaryButton
+        label="Remover"
+        onPress={() => props.onPress(props.index)}
+      />
     </CardContainer>
   );
 };

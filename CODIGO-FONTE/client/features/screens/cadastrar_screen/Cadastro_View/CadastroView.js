@@ -19,10 +19,6 @@ const CadastroView = () => {
   });
 
   const onSubmit = ({ description, price, title, troupe }) => {
-    console.log(description);
-    console.log(price);
-    console.log(title);
-    console.log(troupe);
     //POST
     navigation.navigate("Cadastro_AddSession", { spectacleId: "111" });
   };
