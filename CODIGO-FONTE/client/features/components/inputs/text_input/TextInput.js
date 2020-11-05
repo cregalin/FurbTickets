@@ -16,6 +16,7 @@ const StyledTextInput = (props) => {
         placeholderTextColor={
           props.placeholderColor ? props.placeholderColor : "black"
         }
+        keyboardType={props.keyboardType ? props.keyboardType : "default"}
       />
     </InputContainer>
   );

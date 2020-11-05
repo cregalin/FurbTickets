@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { Modal } from "react-native";
 import { useForm } from "react-hook-form";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { TextInputMask } from "react-native-masked-text";
+import { useNavigation } from "@react-navigation/native";
 
 import SecondaryButton from "../../../components/buttons/secondary_button/SecondaryButton";
 import StyledMaskTextInput from "../../../components/inputs/text_mask_input/MaskTextInput";
-import CloseButton from "../../../components/buttons/close_button/CloseButton";
-import { darkPurple } from "../../../theme/colors";
 import { StyledText } from "../../../components/texts/styles";
 import { Container } from "../../../components/containers/styles";
 import SessionCard from "../../../components/session_card/SessionCard";
@@ -18,7 +15,9 @@ import { StyledScrollView, ModalContainer, InModalContainer } from "./styles";
 const CadastroAddSession = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const route = useRoute();
+  const [currentDate, setDate] = useState("");
+  const [currentTime, setTime] = useState("");
+  const [sessionAttributes, setSessionAttributes] = useState([]);
 
   const formProps = useForm({
     defaultValues: {
@@ -27,26 +26,48 @@ const CadastroAddSession = () => {
     },
   });
 
-  const onSubmit = ({ date, time }) => {
-    console.log(date);
-    console.log(time);
-    //POST
+  const onSubmit = () => {
+    setSessionAttributes([
+      ...sessionAttributes,
+      {
+        date: currentDate,
+        time: currentTime,
+      },
+    ]);
+    setModalVisible(false);
+    setDate("");
+    setTime("");
   };
 
-  let currentDate = formProps.watch("date");
-  let currentTime = formProps.watch("time");
-
-  console.log("DATA: " + currentDate);
-  console.log("HORA:" + currentTime);
+  const onDelete = (index) => {
+    const newSessionAttributes = sessionAttributes.filter((item, itemIndex) => {
+      return itemIndex !== index;
+    });
+    setSessionAttributes(newSessionAttributes);
+  };
 
   return (
     <Container>
       <PrimaryButton label="Adicionar" onPress={() => setModalVisible(true)} />
       <PrimaryButton label="Avançar" />
       <StyledScrollView>
-        <SessionCard />
+        {sessionAttributes.length > 0 ? (
+          sessionAttributes.map((session, index) => (
+            <SessionCard
+              key={index}
+              index={index}
+              date={session.date}
+              time={session.time}
+              onPress={onDelete}
+            />
+          ))
+        ) : (
+          <StyledText textAlign="center">
+            Ainda não existem sessões cadastradas para este espetáculo.
+          </StyledText>
+        )}
       </StyledScrollView>
-      <Modal visible={modalVisible} animationType={"fade"} transparent={true}>
+      <Modal visible={modalVisible} animationType={"slide"} transparent={true}>
         <ModalContainer>
           <InModalContainer>
             <StyledText
@@ -64,7 +85,7 @@ const CadastroAddSession = () => {
               name="date"
               register={formProps.register}
               required={true}
-              onChangeText={(text) => formProps.setValue("date", text)}
+              onChangeText={(text) => setDate(text)}
               placeholder="Data..."
               value={currentDate}
             />
@@ -74,13 +95,14 @@ const CadastroAddSession = () => {
               name="time"
               register={formProps.register}
               required={true}
-              onChangeText={(text) => formProps.setValue("time", text)}
+              onChangeText={(text) => setTime(text)}
               placeholder="Hora..."
               value={currentTime}
             />
+            <SecondaryButton label="Salvar" onPress={() => onSubmit()} />
             <SecondaryButton
-              label="Salvar"
-              onPress={() => formProps.handleSubmit(onSubmit)}
+              label="Voltar"
+              onPress={() => setModalVisible(false)}
             />
           </InModalContainer>
         </ModalContainer>

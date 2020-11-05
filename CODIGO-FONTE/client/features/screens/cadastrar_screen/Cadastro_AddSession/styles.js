@@ -25,7 +25,7 @@ export const ModalContainer = styled.View`
 
 export const InModalContainer = styled.View`
   width: 99%;
-  height: 30%;
+  height: 40%;
   border-width: 1px;
   background-color: ${white};
   padding: 10px;
