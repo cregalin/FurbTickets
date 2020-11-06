@@ -1,33 +1,33 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, TextInput, StyleSheet, Button } from "react-native";
+import { Button } from "react-native";
 import * as S from './styles'
-import StyledTextInput from "../../components/inputs/text_input/TextInput";
 import StyledMaskTextInput from "../../components/inputs/text_mask_input/MaskTextInput";
 import PrimaryButton from "../../components/buttons/primary_button/PrimaryButton";
 import { Container } from "../../components/containers/styles";
-import { darkPurple, xanadu } from "../../theme/colors";
 import { useNavigation } from "@react-navigation/native";
-import { connect } from "react-redux";
 import { Title } from "../../components/texts/styles";
 
 const BuscarScreen = () => {
 
-  const navigation = useNavigation();
-  const [title, setTitle] = useState("");
-  const [room, setRoom] = useState("");
-  const [value, setValue] = useState("");
-  const [description, setDescription] = useState("");
-  const [day, setDay] = useState("");
-  const [hour, setHour] = useState("");
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [troupe, setTroupe] = useState("")
+  const [dateFrom, setDateFrom] = useState("")
+  const [dateTo, setDateTo] = useState("")
+  const [timeFrom, setTimeFrom] = useState("")
+  const [timeTo, setTimeTo] = useState("")
 
   const searchSpectacles = () => {
     let params = {}
+
     if(title) params.title = title
-    if(room) params.room = room
-    if(value) params.value = value
     if(description) params.description = description
-    if(day) params.day = day
-    if(hour) params.hour = hour
+    if(troupe) params.troupe = troupe
+    if(dateFrom) params.dateFrom = dateFrom
+    if(dateTo) params.dateTo = dateTo
+    if(timeFrom) params.timeFrom = timeFrom
+    if(timeTo) params.timeTo = timeTo
+
     navigation.navigate("Lista", params)
   }
 
@@ -35,34 +35,50 @@ const BuscarScreen = () => {
     <Container>
       <Title>Busque espetáculos.</Title>
       <S.GridContainer>
+
         <S.Label>Titulo</S.Label>
         <S.InputComponent
           value={title}
-          onChangeText={setTitle}/>
-        <S.Label>Sala</S.Label>
-        <S.InputComponent
-          value={room}
-          onChangeText={setRoom}/>
-        <S.Label>Valor</S.Label>
-        <S.InputComponent
-          value={value}
-          onChangeText={setValue}/>
+        onChangeText={setTitle}/>
+
         <S.Label>Descrição</S.Label>
         <S.InputComponent
           value={description}
-          onChangeText={setDescription}/>
-        <S.Label>Dia</S.Label>
+        onChangeText={setDescription}/>
+
+        <S.Label>Trupe</S.Label>
+        <S.InputComponent
+          value={troupe}
+        onChangeText={setTroupe}/>
+
+        <S.Label>De dia:</S.Label>
         <StyledMaskTextInput
           maskType="datetime"
           format="DD/MM/YYYY"
-          value={day}
-          onChangeText={setDay}/>
-        <S.Label>Hora</S.Label>
+          value={dateFrom}
+        onChangeText={setDateFrom}/>
+
+        <S.Label>Até Dia</S.Label>
+        <StyledMaskTextInput
+          maskType="datetime"
+          format="DD/MM/YYYY"
+          value={dateTo}
+        onChangeText={setDateTo}/>
+
+        <S.Label>Hora mínima:</S.Label>
         <StyledMaskTextInput
           maskType={"datetime"}
           format="HH:mm"
-          value={hour}
-          onChangeText={setHour}/>
+          value={timeFrom}
+        onChangeText={setTimeFrom}/>
+
+        <S.Label>Hora máxima:</S.Label>
+        <StyledMaskTextInput
+          maskType={"datetime"}
+          format="HH:mm"
+          value={timeTo}
+        onChangeText={setTimeTo}/>
+
     </S.GridContainer>
       <PrimaryButton onPress={searchSpectacles} label="Buscar" />
     </Container>
