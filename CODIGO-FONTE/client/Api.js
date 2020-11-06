@@ -1,37 +1,29 @@
-const axios = require("axios");
+const axios = require('axios');
 
 const fitubServer = axios.create({
-  baseUrl: "http://11a8b7c7eea5.ngrok.io",
+  baseURL: 'https://3c49a41ff6b3.ngrok.io',
   timeout: 1000,
-  headers: { Accept: "application/json", "Content-Type": "application/json" },
+  headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
 
-/**
- * @summary Funcao de teste para consumo do back-end
- */
-export function getTeste() {
-  return fetch(new Request("http://ad355c6c56df.ngrok.io/notes")).then(
-    (response) => {
-      return response.json();
-    }
-  );
-}
-
-export function postTeste() {
-  let object = {
-    note: {
-      text: "Hello",
+export function postShow({ title, description, price, troupe }) {
+  const payload = {
+    show: {
+      title: title,
+      description: description,
+      price: price,
+      troupe: troupe,
+      room_id: 3,
     },
   };
-  let requestParameters = {
-    method: "post",
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
-    body: JSON.stringify(object),
+  return fitubServer.post('/shows', payload);
+}
+
+export function putShowSessions(sessionAttributes, spectacleId) {
+  const payload = {
+    show: {
+      sessions_attributes: sessionAttributes,
+    },
   };
-  console.log(requestParameters.body);
-  return fetch("http://ad355c6c56df.ngrok.io/notes", requestParameters).then(
-    function (response) {
-      return response.json();
-    }
-  );
+  return fitubServer.put(`/shows/${spectacleId}`, payload);
 }
