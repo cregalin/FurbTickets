@@ -1,30 +1,60 @@
-import React, { useState } from "react";
-import { Modal } from "react-native";
-import { useForm } from "react-hook-form";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from 'react';
+import { Modal } from 'react-native';
+import { useForm } from 'react-hook-form';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { putShowSessions } from '../../../../Api';
+import { parseDateToPayload } from '../../../helpers/index';
 
-import SecondaryButton from "../../../components/buttons/secondary_button/SecondaryButton";
-import StyledMaskTextInput from "../../../components/inputs/text_mask_input/MaskTextInput";
-import { StyledText } from "../../../components/texts/styles";
-import { Container } from "../../../components/containers/styles";
-import SessionCard from "../../../components/session_card/SessionCard";
-import PrimaryButton from "../../../components/buttons/primary_button/PrimaryButton";
+import SecondaryButton from '../../../components/buttons/secondary_button/SecondaryButton';
+import StyledMaskTextInput from '../../../components/inputs/text_mask_input/MaskTextInput';
+import { StyledText } from '../../../components/texts/styles';
+import { Container } from '../../../components/containers/styles';
+import SessionCard from '../../../components/session_card/SessionCard';
+import PrimaryButton from '../../../components/buttons/primary_button/PrimaryButton';
+import { LoaderCard } from '../../../components/LoaderCard/LoaderCard';
 
-import { StyledScrollView, ModalContainer, InModalContainer } from "./styles";
+import { StyledScrollView, ModalContainer, InModalContainer } from './styles';
 
 const CadastroAddSession = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [currentDate, setDate] = useState("");
-  const [currentTime, setTime] = useState("");
+  const route = useRoute();
+  const navigation = useNavigation();
+
+  const { spectacleId } = route.params;
+
+  const [loading, setLoading] = useState(false);
+
+  const [currentDate, setDate] = useState('');
+  const [currentTime, setTime] = useState('');
   const [sessionAttributes, setSessionAttributes] = useState([]);
 
   const formProps = useForm({
     defaultValues: {
-      date: "",
-      time: "",
+      date: '',
+      time: '',
     },
   });
+
+  const onSave = async () => {
+    setLoading(true);
+    const payloadSessions = sessionAttributes.map((session) => {
+      return {
+        time: session.time,
+        date: parseDateToPayload(session.date),
+      };
+    });
+    putShowSessions(payloadSessions, spectacleId)
+      .then(() => {
+        setLoading(false);
+        navigation.navigate('Home');
+      })
+      .catch((error) => {
+        setLoading(false);
+        navigation.navigate('Home');
+        console.log(error);
+      });
+  };
 
   const onSubmit = () => {
     setSessionAttributes([
@@ -35,8 +65,8 @@ const CadastroAddSession = () => {
       },
     ]);
     setModalVisible(false);
-    setDate("");
-    setTime("");
+    setDate('');
+    setTime('');
   };
 
   const onDelete = (index) => {
@@ -49,7 +79,8 @@ const CadastroAddSession = () => {
   return (
     <Container>
       <PrimaryButton label="Adicionar" onPress={() => setModalVisible(true)} />
-      <PrimaryButton label="Avançar" />
+      <PrimaryButton label="Salvar" onPress={onSave} />
+      <LoaderCard loading={loading} />
       <StyledScrollView>
         {sessionAttributes.length > 0 ? (
           sessionAttributes.map((session, index) => (
@@ -67,20 +98,20 @@ const CadastroAddSession = () => {
           </StyledText>
         )}
       </StyledScrollView>
-      <Modal visible={modalVisible} animationType={"slide"} transparent={true}>
+      <Modal visible={modalVisible} animationType={'slide'} transparent={true}>
         <ModalContainer>
           <InModalContainer>
             <StyledText
               fontSize={22}
-              textAlign={"center"}
-              fontColor={"black"}
-              fontWeight={"bold"}
+              textAlign={'center'}
+              fontColor={'black'}
+              fontWeight={'bold'}
               marginBottom={10}
             >
               Adicionar Sessão
             </StyledText>
             <StyledMaskTextInput
-              maskType={"datetime"}
+              maskType="datetime"
               format="DD/MM/YYYY"
               name="date"
               register={formProps.register}
@@ -90,7 +121,7 @@ const CadastroAddSession = () => {
               value={currentDate}
             />
             <StyledMaskTextInput
-              maskType={"datetime"}
+              maskType="datetime"
               format="HH:mm"
               name="time"
               register={formProps.register}
@@ -99,7 +130,7 @@ const CadastroAddSession = () => {
               placeholder="Hora..."
               value={currentTime}
             />
-            <SecondaryButton label="Salvar" onPress={() => onSubmit()} />
+            <SecondaryButton label="Salvar" onPress={onSubmit} />
             <SecondaryButton
               label="Voltar"
               onPress={() => setModalVisible(false)}
