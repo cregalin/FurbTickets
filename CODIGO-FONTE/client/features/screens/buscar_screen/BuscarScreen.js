@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet, Button } from "react-native";
 import * as S from './styles'
 import StyledTextInput from "../../components/inputs/text_input/TextInput";
+import StyledMaskTextInput from "../../components/inputs/text_mask_input/MaskTextInput";
 import PrimaryButton from "../../components/buttons/primary_button/PrimaryButton";
 import { Container } from "../../components/containers/styles";
 import { darkPurple, xanadu } from "../../theme/colors";
@@ -35,23 +36,33 @@ const BuscarScreen = () => {
       <Title>Busque espetáculos.</Title>
       <S.GridContainer>
         <S.Label>Titulo</S.Label>
-        <StyledTextInput
-        onChangeText={setTitle}/>
+        <S.InputComponent
+          value={title}
+          onChangeText={setTitle}/>
         <S.Label>Sala</S.Label>
-        <StyledTextInput
-        onChangeText={setRoom}/>
+        <S.InputComponent
+          value={room}
+          onChangeText={setRoom}/>
         <S.Label>Valor</S.Label>
-        <StyledTextInput
-        onChangeText={setValue}/>
+        <S.InputComponent
+          value={value}
+          onChangeText={setValue}/>
         <S.Label>Descrição</S.Label>
-        <StyledTextInput
-        onChangeText={setDescription}/>
+        <S.InputComponent
+          value={description}
+          onChangeText={setDescription}/>
         <S.Label>Dia</S.Label>
-        <StyledTextInput
-        onChangeText={setDay}/>
+        <StyledMaskTextInput
+          maskType="datetime"
+          format="DD/MM/YYYY"
+          value={day}
+          onChangeText={setDay}/>
         <S.Label>Hora</S.Label>
-        <StyledTextInput
-        onChangeText={setHour}/>
+        <StyledMaskTextInput
+          maskType={"datetime"}
+          format="HH:mm"
+          value={hour}
+          onChangeText={setHour}/>
     </S.GridContainer>
       <PrimaryButton onPress={searchSpectacles} label="Buscar" />
     </Container>

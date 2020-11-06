@@ -1,6 +1,7 @@
 import styled from "styled-components/native"
 import {Text, View, TextInput} from 'react-native'
 import { StyledText } from "../../components/texts/styles";
+import { electricPurple } from "../../theme/colors";
 
 export const Container = styled(View)`
   padding: 24px;
@@ -26,4 +27,10 @@ export const Label = styled(StyledText)`
   justify-content: center;
   display: flex;
   align-items: center;
+`
+export const InputComponent = styled(TextInput)`
+  border-bottom-width: 1px;
+  border-color: ${electricPurple};
+  width: 90%;
+  margin-bottom: 20px;
 `

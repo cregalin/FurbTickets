@@ -4,27 +4,17 @@ import Spectacle from '../../components/Spectacle/Spectacle'
 import Button from '../../components/buttons/primary_button/PrimaryButton'
 import * as S from './SpectacleListStyles'
 import moment from 'moment'
+import {paramsToQuery} from './SpectacleListUtils'
 
 const SpectacleList = ({route}) => {
 
   const [spectacles, setSpectacles] = useState([])
 
-  const {title,
-    room,
-    value,
-    description,
-    day,
-    hour} = route.params
-
   useEffect(() => {
-    fetch(`http://a0df22c9e199.ngrok.io/shows?date_from=2019-01-01&date_to=2019-01-05${title ? '&title=' + title : ''}${description ? '&description=' + description : ''}&troupe=Trupe&time_from=11:30&time_to=18:30`)
+    fetch(`https://1ce17fbefec7.ngrok.io/shows${paramsToQuery(route.params)}`)
     .then(res => res.json())
     .then(({data}) => setSpectacles(data))
   }, [])
-
-  useEffect(() => {
-    console.log(spectacles)
-  }, [spectacles])
 
   const SpectacleWrapper = ({spectacle}) => {
     return <S.Centered>
