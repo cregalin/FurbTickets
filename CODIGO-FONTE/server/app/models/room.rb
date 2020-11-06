@@ -3,6 +3,6 @@ class Room < ApplicationRecord
   validates :description, :room_type, presence: true
 
   has_many :chairs, dependent: :destroy
+  has_many :shows
   accepts_nested_attributes_for :chairs
-
 end
