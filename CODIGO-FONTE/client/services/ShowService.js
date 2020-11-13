@@ -13,7 +13,8 @@ function timeout(ms) {
 }
 
 export async function getShows(params) {
-  return fitubServer.get(`shows${paramsToQuery(params)}`).then(response => response.data.data);
+  let query = paramsToQuery(params)
+  return fitubServer.get(`shows${query ? '?' + query : ''}`).then(response => response.data.data);
 }
 
 export function postShow({ title, description, price, troupe }) {

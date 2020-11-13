@@ -36,6 +36,6 @@ const paramsToArray = params => {
 export const paramsToQuery = params => {
   return paramsToArray(params)
   .filter(param => param.value)
-  .map(param => `${params.key}=${param.value}`)
-  .reduce((curr, acc) => acc ? `${acc}&${curr}` : `?${curr}`, '')
+  .map(param => `${param.key}=${param.value}`)
+  .join('&')
 }

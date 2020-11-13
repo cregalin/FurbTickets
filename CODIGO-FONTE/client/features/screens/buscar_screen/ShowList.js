@@ -14,7 +14,7 @@ const ShowList = ({route}) => {
 
   useEffect(() => {
     getShows(route.params)
-    .then(({data}) => setSpectacles(data))
+    .then(data => setSpectacles(data))
   }, [])
 
   const SpectacleWrapper = ({spectacle}) => {
