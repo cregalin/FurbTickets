@@ -1,6 +1,6 @@
 export function parseCurrency(value) {
-  var formatado = 'R$ ' + value.toFixed(2).replace('.', ',');
-  return formatado;
+  let formatado = `R$ ${parseFloat(value).toFixed(2)}`
+  return formatado.replace('.', ',');
 }
 
 export function parseDateToPayload(date) {

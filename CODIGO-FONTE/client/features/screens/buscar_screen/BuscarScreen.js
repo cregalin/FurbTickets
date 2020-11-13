@@ -1,34 +1,25 @@
 import React, { useState } from "react";
 import { Button } from "react-native";
 import * as S from './styles'
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import StyledMaskTextInput from "components/inputs/text_mask_input/MaskTextInput";
 import PrimaryButton from "components/buttons/primary_button/PrimaryButton";
 import { Container } from "components/containers/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Title } from "components/texts/styles";
-import StyledTextInput from "components/inputs/text_input/TextInput";
+import NoControlTextInput from "components/inputs/text_input/NoControlTextInput";
 
 const BuscarScreen = () => {
+  const navigation = useNavigation();
 
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [troupe, setTroupe] = useState('')
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
   const [timeFrom, setTimeFrom] = useState('')
   const [timeTo, setTimeTo] = useState('')
 
-  const formProps = useForm({
-    defaultValues: {
-      title: "",
-      description: "",
-      troupe: "",
-    }
-  })
-
-  const searchSpectacles = ({
-    title,
-    description,
-    troupe,
-  }) => {
+  const searchSpectacles = () => {
     let params = {}
 
     if(title) params.title = title
@@ -38,6 +29,7 @@ const BuscarScreen = () => {
     if(dateTo) params.dateTo = dateTo
     if(timeFrom) params.timeFrom = timeFrom
     if(timeTo) params.timeTo = timeTo
+    console.log(params)
     navigation.navigate("Lista", params)
   }
 
@@ -45,58 +37,54 @@ const BuscarScreen = () => {
     <Container>
       <Title>Busque espetáculos.</Title>
       <S.GridContainer>
-        <FormProvider {...formProps}>
-          <S.Label>Título</S.Label>
-          <StyledTextInput
-            placeholder="Titulo"
-            name="title"
-            control={formProps.control}
-            onChangeText={text => formProps.setValue(("title", text))}
-          />
+        <S.Label>Título</S.Label>
+        <NoControlTextInput
+          placeholder="Titulo"
+          name="title"
+        onChangeText={text => setTitle((text))}/>
+
         <S.Label>Descrição</S.Label>
-          <StyledTextInput
-            placeholder="Descrição"
-            name="description"
-            control={formProps.control}
-            onChangeText={text => formProps.setValue(("description", text))}
-          />
+        <NoControlTextInput
+          placeholder="Descrição"
+          name="description"
+        onChangeText={text => setDescription((text))}/>
+
         <S.Label>Trupe</S.Label>
-          <StyledTextInput
-            placeholder="Trupe"
-            name="troupe"
-            control={formProps.control}
-            onChangeText={text => formProps.setValue(("troupe", text))}
-          />
-         </FormProvider>
-      </S.GridContainer>
-      <S.Label>De dia:</S.Label>
+        <NoControlTextInput
+          placeholder="Trupe"
+          name="troupe"
+          onChangeText={text => setTroupe((text))}
+        />
+
+        <S.Label>De dia:</S.Label>
         <StyledMaskTextInput
           maskType="datetime"
           format="DD/MM/YYYY"
           value={dateFrom}
-        onChangeText={text => formProps.setValue(("troupe", dateFrom))}/>
+        onChangeText={text => setDateFrom((dateFrom))}/>
 
         <S.Label>Até Dia</S.Label>
         <StyledMaskTextInput
           maskType="datetime"
           format="DD/MM/YYYY"
           value={dateTo}
-        onChangeText={text => formProps.setValue(("troupe", dateTo))}/>
+        onChangeText={text => setDateTo((dateTo))}/>
 
         <S.Label>Hora mínima:</S.Label>
         <StyledMaskTextInput
           maskType={"datetime"}
           format="HH:mm"
           value={timeFrom}
-        onChangeText={text => formProps.setValue(("troupe", timeFrom))}/>
+        onChangeText={text => setTimeFrom((timeFrom))}/>
 
         <S.Label>Hora máxima:</S.Label>
         <StyledMaskTextInput
           maskType={"datetime"}
           format="HH:mm"
           value={timeTo}
-        onChangeText={text => formProps.setValue(("troupe", timeTo))}/>
-      <PrimaryButton onPress={formProps.handleSubmit(onSubmit)} label="Buscar" />
+        onChangeText={text => setTimeTo((timeTo))}/>
+      </S.GridContainer>
+      <PrimaryButton onPress={searchSpectacles} label="Buscar" />
     </Container>
   );
 };

@@ -3,7 +3,7 @@ import {paramsToQuery} from 'utils/ShowListParamsUtils'
 const axios = require('axios');
 
 const fitubServer = axios.create({
-  baseURL: 'https://5fc1644c8694.ngrok.io',
+  baseURL: 'https://6f899297d97b.ngrok.io',
   timeout: 1000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
@@ -13,7 +13,7 @@ function timeout(ms) {
 }
 
 export async function getShows(params) {
-  return fitubServer.get(`shows${paramsToQuery(params)}`);
+  return fitubServer.get(`shows${paramsToQuery(params)}`).then(response => response.data.data);
 }
 
 export function postShow({ title, description, price, troupe }) {

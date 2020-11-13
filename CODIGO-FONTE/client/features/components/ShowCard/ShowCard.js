@@ -16,7 +16,7 @@ const ShowCard = ({ show }) => {
       <RowField label="Sala:" value={show.room_id} />
       <RowField
         label="Próxima Sessão:"
-        value={`${show.sessions_attributes[0].date} - ${show.sessions_attributes[0].time}`}
+        value={`${show.session_date} - ${show.session_time}`}
       />
       <ShowCardButtons onPressDetails={() => {}} onPressTicket={() => {}} />
     </Card>

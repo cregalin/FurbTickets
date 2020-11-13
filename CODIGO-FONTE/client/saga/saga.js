@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { Alert } from "react-native";
-import { getTeste, postTeste } from "../Api";
+import { getTeste, postTeste } from "baseServices/ShowService";
 
 function* get() {
   try {
@@ -18,7 +18,6 @@ function* get() {
 function* post() {
   try {
     const objetoInserido = yield call(postTeste);
-    console.log(objetoInserido);
 
     const novaLista = yield call(getTeste);
 
