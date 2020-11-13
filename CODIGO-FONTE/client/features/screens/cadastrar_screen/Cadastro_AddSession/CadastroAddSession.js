@@ -3,7 +3,7 @@ import { Modal } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { putShowSessions } from '../../../../Api';
-import { parseDateToPayload } from '../../../helpers/index';
+import { parseDateToPayload } from 'helpers';
 
 import SecondaryButton from '../../../components/buttons/secondary_button/SecondaryButton';
 import StyledMaskTextInput from '../../../components/inputs/text_mask_input/MaskTextInput';

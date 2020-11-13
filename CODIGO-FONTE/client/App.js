@@ -9,7 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./features/screens/home_screen/HomeScreen";
 import BuscarScreen from "./features/screens/buscar_screen/BuscarScreen";
-import SpectacleList from "./features/screens/buscar_screen/SpectacleList";
+import ShowList from "./features/screens/buscar_screen/ShowList";
 import CadastrarScreen from "./features/screens/cadastrar_screen/CadastrarScreen";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -36,7 +36,7 @@ export default function App() {
           />
           <Stack.Screen
             name="Lista"
-            component={SpectacleList}
+            component={ShowList}
             options={{ title: "Escolher Espetáculo", headerTitleAlign: "right" }}
           />
           <Stack.Screen

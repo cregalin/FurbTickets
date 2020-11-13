@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Anchor from '../../../components/buttons/anchor/Anchor';
+import Anchor from 'components/buttons/anchor/Anchor';
 
 const ShowCardButtons = ({ onPressTicket, onPressDetails }) => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
-import { parseCurrency } from '../../../../helpers';
-import { Card } from '../../../components/cards/styles';
-import RowField from '../../../components/fields/RowField/RowField';
-import { StyledText } from '../../../components/texts/styles';
+import { parseCurrency } from 'helpers';
+import { Card } from 'components/cards/styles';
+import RowField from 'components/fields/RowField/RowField';
+import { StyledText } from 'components/texts/styles';
 import ShowCardButtons from './ShowCardButtons';
 
 const ShowCard = ({ show }) => {

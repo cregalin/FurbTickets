@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Anchor from '../../../components/buttons/anchor/Anchor';
+import Anchor from 'components/buttons/anchor/Anchor';
 
 const HomeButtons = ({ onPressRemove, onPressAdd }) => {
   return (

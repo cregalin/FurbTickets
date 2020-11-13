@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { getShows } from '../../../Api';
+import { getShows } from 'baseServices/ShowService';
 import { useNavigation } from '@react-navigation/native';
-import { Container, ScrollContainer } from '../../components/containers/styles';
-import ShowCard from './ShowCard/ShowCard';
-import { LoaderCard } from '../../components/cards/LoaderCard/LoaderCard';
+import { Container, ScrollContainer } from 'components/containers/styles';
+import ShowCard from 'components/ShowCard/ShowCard';
+import { LoaderCard } from 'components/cards/LoaderCard/LoaderCard';
 import HomeButtons from './HomeButtons/HomeButtons';
 
 const HomeScreen = () => {
