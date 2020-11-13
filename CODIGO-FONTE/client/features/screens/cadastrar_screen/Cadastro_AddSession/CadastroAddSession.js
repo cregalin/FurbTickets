@@ -11,7 +11,7 @@ import { StyledText } from '../../../components/texts/styles';
 import { Container } from '../../../components/containers/styles';
 import SessionCard from '../../../components/session_card/SessionCard';
 import PrimaryButton from '../../../components/buttons/primary_button/PrimaryButton';
-import { LoaderCard } from '../../../components/LoaderCard/LoaderCard';
+import { LoaderCard } from '../../../components/cards/LoaderCard/LoaderCard';
 
 import { StyledScrollView, ModalContainer, InModalContainer } from './styles';
 
@@ -23,6 +23,8 @@ const CadastroAddSession = () => {
 
   const { spectacleId } = route.params;
 
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [currentDate, setDate] = useState('');
@@ -37,6 +39,7 @@ const CadastroAddSession = () => {
   });
 
   const onSave = async () => {
+    setOpen(true);
     setLoading(true);
     const payloadSessions = sessionAttributes.map((session) => {
       return {
@@ -50,8 +53,7 @@ const CadastroAddSession = () => {
         navigation.navigate('Home');
       })
       .catch((error) => {
-        setLoading(false);
-        navigation.navigate('Home');
+        setError(true);
         console.log(error);
       });
   };
@@ -80,7 +82,12 @@ const CadastroAddSession = () => {
     <Container>
       <PrimaryButton label="Adicionar" onPress={() => setModalVisible(true)} />
       <PrimaryButton label="Salvar" onPress={onSave} />
-      <LoaderCard loading={loading} />
+      <LoaderCard
+        open={open}
+        loading={loading}
+        error={error}
+        onCloseModal={() => setOpen(false)}
+      />
       <StyledScrollView>
         {sessionAttributes.length > 0 ? (
           sessionAttributes.map((session, index) => (

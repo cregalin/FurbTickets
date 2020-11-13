@@ -1,13 +1,13 @@
-import React from "react";
-import { ButtonContainer } from "./styles";
-import { StyledText } from "../../texts/styles";
-import { white } from "../../../theme/colors";
+import React from 'react';
+import { ButtonContainer } from './styles';
+import { StyledText } from '../../texts/styles';
+import { white } from '../../../theme/colors';
 
-const PrimaryButton = (props) => {
+const PrimaryButton = ({ onPress, label }) => {
   return (
-    <ButtonContainer onPress={props.onPress}>
-      <StyledText fontSize={14} textAlign={"center"} fontColor={white}>
-        {props.label}
+    <ButtonContainer onPress={onPress}>
+      <StyledText fontSize={14} textAlign={'center'} fontColor={white}>
+        {label}
       </StyledText>
     </ButtonContainer>
   );

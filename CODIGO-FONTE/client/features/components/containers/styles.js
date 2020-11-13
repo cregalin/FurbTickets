@@ -10,3 +10,12 @@ export const Container = styled.View`
     props.justifyContent ? props.justifyContent : "center"};
   padding: 10px;
 `;
+
+export const ScrollContainer = styled.ScrollView.attrs((props) => ({
+  contentContainerStyle: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}))`
+  width: 100%;
+`;

@@ -7,7 +7,7 @@ import { Container } from '../../../components/containers/styles';
 import { darkPurple } from '../../../theme/colors';
 import PrimaryButton from '../../../components/buttons/primary_button/PrimaryButton';
 import StyledTextInput from '../../../components/inputs/text_input/TextInput';
-import { LoaderCard } from '../../../components/LoaderCard/LoaderCard';
+import { LoaderCard } from '../../../components/cards/LoaderCard/LoaderCard';
 
 const CadastroView = () => {
   const navigation = useNavigation();
@@ -20,10 +20,14 @@ const CadastroView = () => {
     },
   });
 
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const onSubmit = ({ description, price, title, troupe }) => {
     setLoading(true);
+    setError(false)
+    setOpen(true);
     postShow({ description, price, title, troupe })
       .then((response) => {
         setLoading(false);
@@ -31,15 +35,21 @@ const CadastroView = () => {
         navigation.navigate('Cadastro_AddSession', { spectacleId: showId });
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
+        setError(true);
+        console.log(error);
       });
   };
 
   return (
     <Container justifyContent="flex-start">
       <FormProvider {...formProps}>
-        <LoaderCard loading={loading} />
+        <LoaderCard
+          open={open}
+          loading={loading}
+          error={error}
+          onCloseModal={() => setOpen(false)}
+        />
         <StyledTextInput
           placeholder="Título..."
           placeholderColor={darkPurple}
