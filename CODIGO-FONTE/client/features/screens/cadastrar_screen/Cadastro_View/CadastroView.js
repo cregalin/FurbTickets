@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
-import { postShow } from '../../../../Api';
+import { postShow } from 'baseServices/ShowService';
 
-import { Container } from '../../../components/containers/styles';
+import { Container } from 'components/containers/styles';
 import { darkPurple } from '../../../theme/colors';
-import PrimaryButton from '../../../components/buttons/primary_button/PrimaryButton';
-import StyledTextInput from '../../../components/inputs/text_input/TextInput';
-import { LoaderCard } from '../../../components/cards/LoaderCard/LoaderCard';
+import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
+import StyledTextInput from 'components/inputs/text_input/TextInput';
+import { LoaderCard } from 'components/cards/LoaderCard/LoaderCard';
 
 const CadastroView = () => {
   const navigation = useNavigation();

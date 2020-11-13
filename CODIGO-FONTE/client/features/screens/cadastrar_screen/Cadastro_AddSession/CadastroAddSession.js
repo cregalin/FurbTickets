@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Modal } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { putShowSessions } from '../../../../Api';
+import { putShowSessions } from 'baseServices/ShowService';
 import { parseDateToPayload } from 'helpers';
 
-import SecondaryButton from '../../../components/buttons/secondary_button/SecondaryButton';
-import StyledMaskTextInput from '../../../components/inputs/text_mask_input/MaskTextInput';
-import { StyledText } from '../../../components/texts/styles';
-import { Container } from '../../../components/containers/styles';
-import SessionCard from '../../../components/session_card/SessionCard';
-import PrimaryButton from '../../../components/buttons/primary_button/PrimaryButton';
-import { LoaderCard } from '../../../components/cards/LoaderCard/LoaderCard';
+import SecondaryButton from 'components/buttons/secondary_button/SecondaryButton';
+import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
+import { StyledText } from 'components/texts/styles';
+import { Container } from 'components/containers/styles';
+import SessionCard from 'components/session_card/SessionCard';
+import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
+import { LoaderCard } from 'components/cards/LoaderCard/LoaderCard';
 
 import { StyledScrollView, ModalContainer, InModalContainer } from './styles';
 
