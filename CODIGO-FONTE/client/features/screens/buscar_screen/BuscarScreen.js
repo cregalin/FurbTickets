@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NoControlTextInput from 'components/inputs/text_input/NoControlTextInput';
 import { Button } from 'react-native';
 import * as S from './styles';
 import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
@@ -6,6 +7,7 @@ import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 import { Container } from 'components/containers/styles';
 import { useNavigation } from '@react-navigation/native';
 import { Title } from 'components/texts/styles';
+import { parseDateToPayload } from 'helpers';
 import NoControlTextInput from 'components/inputs/text_input/NoControlTextInput';
 
 const BuscarScreen = () => {
@@ -25,11 +27,10 @@ const BuscarScreen = () => {
     if (title) params.title = title;
     if (description) params.description = description;
     if (troupe) params.troupe = troupe;
-    if (dateFrom) params.dateFrom = dateFrom;
-    if (dateTo) params.dateTo = dateTo;
+    if (dateFrom) params.dateFrom = parseDateToPayload(dateFrom);
+    if (dateTo) params.dateTo = parseDateToPayload(dateTo);
     if (timeFrom) params.timeFrom = timeFrom;
     if (timeTo) params.timeTo = timeTo;
-    console.log(params);
     navigation.navigate('Lista', params);
   };
 
