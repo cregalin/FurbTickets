@@ -7,6 +7,8 @@ export const StyledText = styled.Text`
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 'normal')};
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
   margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : 0)}px;
+  text-decoration: ${(props) =>
+    props.textDecoration ? props.textDecoration : 'none'};
 `;
 
 export const Title = styled.Text`

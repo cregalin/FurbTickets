@@ -47,7 +47,13 @@ const HomeScreen = () => {
           />
         ) : (
           shows?.map((show, index) => {
-            return <ShowCard key={index} show={show} />;
+            return (
+              <ShowCard
+                key={index}
+                show={show}
+                onPressTicket={(show) => navigation.navigate('Ingresso', show)}
+              />
+            );
           })
         )}
       </ScrollContainer>

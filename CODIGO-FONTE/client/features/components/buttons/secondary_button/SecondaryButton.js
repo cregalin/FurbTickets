@@ -1,18 +1,18 @@
-import React from "react";
-import { ButtonContainer } from "./styles";
-import { StyledText } from "../../texts/styles";
-import { white } from "../../../theme/colors";
+import React from 'react';
+import { ButtonContainer } from './styles';
+import { StyledText } from '../../texts/styles';
+import { white } from '../../../theme/colors';
 
-const SecondaryButton = (props) => {
+const SecondaryButton = ({ onPress, label, width }) => {
   return (
-    <ButtonContainer onPress={() => (props.onPress ? props.onPress() : null)}>
+    <ButtonContainer width={width} onPress={() => (onPress ? onPress() : null)}>
       <StyledText
         fontSize={14}
-        textAlign={"center"}
+        textAlign={'center'}
         fontColor={white}
         fontWeight="bold"
       >
-        {props.label}
+        {label}
       </StyledText>
     </ButtonContainer>
   );

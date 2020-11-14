@@ -18,8 +18,6 @@ export const Input = styled(TextInput)`
 
 export const GridContainer = styled(Container)`
   width: 100%;
-  display: grid;
-  grid-template-columns: 20% 80%;
 `
 
 export const Label = styled(StyledText)`

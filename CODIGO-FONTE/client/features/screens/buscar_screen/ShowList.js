@@ -12,6 +12,8 @@ const ShowList = ({route}) => {
 
   const [spectacles, setSpectacles] = useState([])
 
+  console.log(route.params)
+
   useEffect(() => {
     getShows(route.params)
     .then(({data}) => setSpectacles(data))

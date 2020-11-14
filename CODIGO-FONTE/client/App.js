@@ -1,16 +1,17 @@
-import "react-native-gesture-handler";
-import React from "react";
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
-import { Provider } from "react-redux";
-import reducer from "./reducers/TicketReducer";
-import mySaga from "./saga/saga";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./features/screens/home_screen/HomeScreen";
-import BuscarScreen from "./features/screens/buscar_screen/BuscarScreen";
-import ShowList from "./features/screens/buscar_screen/ShowList";
-import CadastrarScreen from "./features/screens/cadastrar_screen/CadastrarScreen";
+import 'react-native-gesture-handler';
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
+import reducer from './reducers/TicketReducer';
+import mySaga from './saga/saga';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './features/screens/home_screen/HomeScreen';
+import BuscarScreen from './features/screens/buscar_screen/BuscarScreen';
+import ShowList from './features/screens/buscar_screen/ShowList';
+import CadastrarScreen from './features/screens/cadastrar_screen/CadastrarScreen';
+import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
@@ -27,24 +28,35 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{ title: "FITUB", headerTitleAlign: "center" }}
+            options={{ title: 'FITUB', headerTitleAlign: 'center' }}
           />
           <Stack.Screen
             name="Buscar"
             component={BuscarScreen}
-            options={{ title: "Buscar Espetáculo", headerTitleAlign: "right" }}
+            options={{ title: 'Buscar Espetáculo', headerTitleAlign: 'right' }}
           />
           <Stack.Screen
             name="Lista"
             component={ShowList}
-            options={{ title: "Escolher Espetáculo", headerTitleAlign: "right" }}
+            options={{
+              title: 'Escolher Espetáculo',
+              headerTitleAlign: 'right',
+            }}
           />
           <Stack.Screen
             name="Cadastrar"
             component={CadastrarScreen}
             options={{
-              title: "Cadastrar Espetáculo",
-              headerTitleAlign: "right",
+              title: 'Cadastrar Espetáculo',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="Ingresso"
+            component={IngressoScreen}
+            options={{
+              title: 'Comprar ingresso',
+              headerTitleAlign: 'right',
             }}
           />
         </Stack.Navigator>
