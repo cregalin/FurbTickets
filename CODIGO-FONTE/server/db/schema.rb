@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201105233652) do
+ActiveRecord::Schema.define(version: 20201113232647) do
 
   create_table "chairs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string  "reference"
@@ -28,12 +28,14 @@ ActiveRecord::Schema.define(version: 20201105233652) do
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "room_type"
     t.string  "description"
+    t.integer "quantity_chairs"
   end
 
   create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "show_id"
     t.date    "date"
     t.time    "time"
+    t.integer "room_id"
   end
 
   create_table "shows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -41,13 +43,11 @@ ActiveRecord::Schema.define(version: 20201105233652) do
     t.string  "description"
     t.decimal "price",       precision: 10, scale: 4
     t.string  "troupe"
-    t.integer "room_id"
   end
 
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "session_id"
-    t.integer "show_id"
     t.integer "customer_id"
+    t.integer "chair_id"
   end
-
 end
