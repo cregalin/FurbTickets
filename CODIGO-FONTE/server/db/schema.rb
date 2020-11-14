@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200926001249) do
+ActiveRecord::Schema.define(version: 20201113232647) do
 
   create_table "chairs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string  "number"
+    t.string  "reference"
     t.integer "room_id"
     t.integer "status"
+    t.integer "position_x"
+    t.integer "position_y"
   end
 
   create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -24,14 +26,16 @@ ActiveRecord::Schema.define(version: 20200926001249) do
   end
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "type"
+    t.integer "room_type"
     t.string  "description"
+    t.integer "quantity_chairs"
   end
 
   create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "show_id"
     t.date    "date"
     t.time    "time"
+    t.integer "room_id"
   end
 
   create_table "shows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -43,8 +47,7 @@ ActiveRecord::Schema.define(version: 20200926001249) do
 
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "session_id"
-    t.integer "show_id"
     t.integer "customer_id"
+    t.integer "chair_id"
   end
-
 end

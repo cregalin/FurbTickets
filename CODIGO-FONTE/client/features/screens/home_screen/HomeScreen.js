@@ -1,23 +1,63 @@
-import React from "react";
-import { View } from "react-native";
-import { homeScreenStyle } from "./HomeScreenStyle";
-import { connect } from "react-redux";
-import PrimaryButton from "../../components/buttons/primary_button/PrimaryButton";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+
+import { getShows } from 'baseServices/ShowService';
+import { useNavigation } from '@react-navigation/native';
+import { Container, ScrollContainer } from 'components/containers/styles';
+import ShowCard from 'components/ShowCard/ShowCard';
+import { LoaderCard } from 'components/cards/LoaderCard/LoaderCard';
+import HomeButtons from './HomeButtons/HomeButtons';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+
+  const [open, setOpen] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [shows, setShows] = useState(null);
+
+  const fetchShows = async () => {
+    setOpen(true);
+    setLoading(true);
+    const showsResponse = await getShows();
+    setOpen(false);
+    if (!showsResponse) setError(true);
+    else setShows(showsResponse);
+  };
+
+  useEffect(() => {
+    fetchShows();
+  }, []);
+
   return (
-    <View style={homeScreenStyle.container}>
-      <PrimaryButton
-        label={"Cadastrar Espetáculos"}
-        onPress={() => navigation.navigate("Cadastrar")}
+    <Container>
+      <HomeButtons
+        onPressAdd={() => navigation.navigate('Cadastrar')}
+        onPressRemove={() => {}}
+        onPressSearch={() => navigation.navigate('Buscar')}
       />
-      <PrimaryButton
-        label={"Buscar Espetáculos"}
-        onPress={() => navigation.navigate("Buscar")}
-      />
-    </View>
+      <ScrollContainer>
+        {open ? (
+          <LoaderCard
+            text="Buscando sessões..."
+            error={error}
+            loading={loading}
+            onCloseModal={() => setOpen(false)}
+            open={open}
+          />
+        ) : (
+          shows?.map((show, index) => {
+            return (
+              <ShowCard
+                key={index}
+                show={show}
+                onPressTicket={(show) => navigation.navigate('Ingresso', show)}
+              />
+            );
+          })
+        )}
+      </ScrollContainer>
+    </Container>
   );
 };
 

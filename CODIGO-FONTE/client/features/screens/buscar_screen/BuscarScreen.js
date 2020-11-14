@@ -1,33 +1,98 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
-import * as S from './styles'
-import { connect } from "react-redux";
-import mock from "./SpectaclesMock";
-import Spectacle from "../../components/Spectacle/Spectacle";
+import React, { useState } from 'react';
+import NoControlTextInput from 'components/inputs/text_input/NoControlTextInput';
+import { Button } from 'react-native';
+import * as S from './styles';
+import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
+import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
+import { Container } from 'components/containers/styles';
+import { useNavigation } from '@react-navigation/native';
+import { Title } from 'components/texts/styles';
+import { parseDateToPayload } from 'helpers';
+import NoControlTextInput from 'components/inputs/text_input/NoControlTextInput';
 
 const BuscarScreen = () => {
-  const [query, setQuery] = useState("");
-  // const [spectacles, setSpectacles] = useState([])
-  const [spectacles, setSpectacles] = useState(mock);
-  const [filteredSpectacles, setFilteredSpectacles] = useState([])
+  const navigation = useNavigation();
 
-  useEffect(() => {
-    setFilteredSpectacles(spectacles.filter(spectacle => spectacle.title.toUpperCase().includes(query.toUpperCase())))
-  }, [query, spectacles])
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [troupe, setTroupe] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+  const [timeFrom, setTimeFrom] = useState('');
+  const [timeTo, setTimeTo] = useState('');
+
+  const searchSpectacles = () => {
+    let params = {};
+
+    if (title) params.title = title;
+    if (description) params.description = description;
+    if (troupe) params.troupe = troupe;
+    if (dateFrom) params.dateFrom = parseDateToPayload(dateFrom);
+    if (dateTo) params.dateTo = parseDateToPayload(dateTo);
+    if (timeFrom) params.timeFrom = timeFrom;
+    if (timeTo) params.timeTo = timeTo;
+    navigation.navigate('Lista', params);
+  };
 
   return (
-    <S.Container style={styles.container}>
-      <Text>Busque espetáculos.</Text>
-      <S.Input
-        style={styles.input}
-        onChangeText={(text) => setQuery(text)}
-      >
-      <ScrollView>
-        {filteredSpectacles.map((spectacle) => (
-          <Spectacle spectacle={spectacle} />
-        ))}
-      </ScrollView>
-    </S.Container>
+    <Container>
+      <Title>Busque espetáculos.</Title>
+      <S.GridContainer>
+        <PrimaryButton onPress={searchSpectacles} label="Buscar" />
+        <S.Label>Título</S.Label>
+        <NoControlTextInput
+          placeholder="Titulo"
+          name="title"
+          onChangeText={(text) => setTitle(text)}
+        />
+
+        <S.Label>Descrição</S.Label>
+        <NoControlTextInput
+          placeholder="Descrição"
+          name="description"
+          onChangeText={(text) => setDescription(text)}
+        />
+
+        <S.Label>Trupe</S.Label>
+        <NoControlTextInput
+          placeholder="Trupe"
+          name="troupe"
+          onChangeText={(text) => setTroupe(text)}
+        />
+
+        <S.Label>De dia:</S.Label>
+        <StyledMaskTextInput
+          maskType="datetime"
+          format="DD/MM/YYYY"
+          value={dateFrom}
+          onChangeText={(text) => setDateFrom(dateFrom)}
+        />
+
+        <S.Label>Até Dia</S.Label>
+        <StyledMaskTextInput
+          maskType="datetime"
+          format="DD/MM/YYYY"
+          value={dateTo}
+          onChangeText={(text) => setDateTo(dateTo)}
+        />
+
+        <S.Label>Hora mínima:</S.Label>
+        <StyledMaskTextInput
+          maskType={'datetime'}
+          format="HH:mm"
+          value={timeFrom}
+          onChangeText={(text) => setTimeFrom(timeFrom)}
+        />
+
+        <S.Label>Hora máxima:</S.Label>
+        <StyledMaskTextInput
+          maskType={'datetime'}
+          format="HH:mm"
+          value={timeTo}
+          onChangeText={(text) => setTimeTo(timeTo)}
+        />
+      </S.GridContainer>
+    </Container>
   );
 };
 

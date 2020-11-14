@@ -3,10 +3,9 @@ import {Text, View} from 'react-native'
 
 export const Container = styled.View`
   padding: 12px;
-  border: 2px solid blue;
-  borde-radius: 5px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
 `
 
 export const BaseText = styled(Text)`
@@ -17,10 +16,10 @@ export const BaseText = styled(Text)`
   overflow: hidden;
 `
 
-export const FullText = styled(BaseText)`
-  grid-column: span 2;
+export const Title = styled(BaseText)`
+  font-size: 24px;
 `
 
-export const HalfText = styled(BaseText)`
-  grid-column: span 1;
+export const SubTitle = styled(BaseText)`
+  font-size: 16px;
 `

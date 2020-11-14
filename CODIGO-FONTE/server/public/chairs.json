@@ -1,0 +1,21 @@
+[{
+	"reference": "A",
+	"status": "1",
+	"position_x": "0",
+	"position_y": "0"
+}, {
+	"reference": "B",
+	"status": "1",
+	"position_x": "0",
+	"position_y": "1"
+}, {
+	"reference": "C",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "0"
+}, {
+	"reference": "D",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "1"
+}]
