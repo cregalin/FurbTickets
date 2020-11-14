@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201113224605) do
+ActiveRecord::Schema.define(version: 20201113232647) do
 
   create_table "chairs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string  "reference"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20201113224605) do
     t.integer "show_id"
     t.date    "date"
     t.time    "time"
+    t.integer "room_id"
   end
 
   create_table "shows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -42,7 +43,6 @@ ActiveRecord::Schema.define(version: 20201113224605) do
     t.string  "description"
     t.decimal "price",       precision: 10, scale: 4
     t.string  "troupe"
-    t.integer "room_id"
   end
 
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -50,4 +50,5 @@ ActiveRecord::Schema.define(version: 20201113224605) do
     t.integer "customer_id"
     t.integer "chair_id"
   end
+
 end
