@@ -46,6 +46,6 @@ class ShowsController < ApplicationController
     end
 
     def show_params
-      params.require(:show).permit(:title, :room_id, :description, :price, :troupe, sessions_attributes: [:date, :time, :id, :destroy])
+      params.require(:show).permit(:title, :description, :price, :troupe, sessions_attributes: [:room_id, :date, :time, :id, :destroy])
     end
 end
