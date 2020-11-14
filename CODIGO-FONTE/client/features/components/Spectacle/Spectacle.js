@@ -5,12 +5,15 @@ import * as S from "./styles"
 const Spectacle = props => {
 
   const {spectacle} = props
-  const {title, session_data, session_time} = spectacle
+  const {title, description, price, group, date, hour} = spectacle
 
   return (
     <S.Container>
-      <S.Title>{title}</S.Title>
-      <S.SubTitle>Sessão: {session_data} - {session_time}</S.SubTitle>
+      <S.FullText>{title}</S.FullText>
+      <S.FullText>{description}</S.FullText>
+      <S.HalfText>{group}</S.HalfText>
+      <S.HalfText>{price}</S.HalfText>
+      <S.FullText>{date} - {hour}</S.FullText>
     </S.Container>
   )
 

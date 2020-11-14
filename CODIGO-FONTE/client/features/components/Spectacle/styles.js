@@ -3,7 +3,7 @@ import {Text, View} from 'react-native'
 
 export const Container = styled.View`
   padding: 12px;
-  borde-radius: 5px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
 `
