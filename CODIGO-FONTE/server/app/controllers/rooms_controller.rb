@@ -9,12 +9,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    # TODO: Melhorar isso aqui, abstrair, tá feio
-    if room_params[:room_id] === 1
-      @room = Room.new(room_params.merge({ chairs_attributes: JSON.parse(File.read("#{ Rails.public_path }/chairs.json"))}))
-    else
-      @room = Room.new(room_params)
-    end
+    @room = Room.new(room_params.merge({ chairs_attributes: JSON.parse(File.read("#{ Rails.public_path }/chairs.json"))}))
 
     if @room.save
       render :show, status: :created, location: @room
@@ -41,6 +36,6 @@ class RoomsController < ApplicationController
     end
 
     def room_params
-      params.require(:room).permit(:room_type, :description)
+      params.require(:room).permit(:room_type, :description, :quantity_chairs)
     end
 end

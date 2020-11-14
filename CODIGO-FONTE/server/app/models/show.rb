@@ -3,7 +3,6 @@ class Show < ApplicationRecord
   validates :price, numericality: { greater_than: 0, less_than: 10000 }
 
   has_many :sessions, dependent: :destroy
-  belongs_to :rooms
   accepts_nested_attributes_for :sessions
 
   scope :by_title, -> (title) {
