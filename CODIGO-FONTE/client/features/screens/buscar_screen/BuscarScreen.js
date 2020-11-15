@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NoControlTextInput from 'components/inputs/text_input/NoControlTextInput';
 import { Button } from 'react-native';
 import * as S from './styles';
 import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';

@@ -12,12 +12,7 @@ const IngressoScreen = () => {
 
   return (
     <Container>
-      <SeletorCadeiras
-        modalVisible={seletorOpen}
-        onCloseModal={() => setOpenSeletor(false)}
-        onSubmit={onSubmit}
-        chairList={mockChairs}
-      />
+      <SeletorCadeiras onSubmit={onSubmit} chairList={mockChairs} />
     </Container>
   );
 };
