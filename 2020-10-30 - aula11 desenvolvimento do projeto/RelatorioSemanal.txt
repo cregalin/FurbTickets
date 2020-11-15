@@ -1,4 +1,4 @@
-2020-10-02 - aula06 desenvolvimento do projeto
+2020-10-30 - aula06 desenvolvimento do projeto
 Relatar O QUE FOI FEITO:
 - Ajustes na tela de listagem de espetáculos
 - Criação das cadeiras da sala ao criar sala
