@@ -1,8 +1,10 @@
 2020-10-02 - aula06 desenvolvimento do projeto
 Relatar O QUE FOI FEITO:
-- TIntegração telas de cadastros e filtro com o backend
+- Ajustes na tela de listagem de espetáculos
+- Criação das cadeiras da sala ao criar sala
+- Cadastro de sessoes no espetáculo
 
 Relatar QUEM FOI O RESPONSÁVEL
-- Heitor
-- Otávio
+- Otavio
 - Caroline
+- Heitor
