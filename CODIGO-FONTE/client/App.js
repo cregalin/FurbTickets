@@ -12,6 +12,7 @@ import EscolherTicket from './features/screens/comprar_ticket/EscolherTicket';
 import BuscarScreen from './features/screens/buscar_screen/BuscarScreen';
 import ShowList from './features/screens/buscar_screen/ShowList';
 import CadastrarScreen from './features/screens/cadastrar_screen/CadastrarScreen';
+import CadastroSala from './features/screens/cadastrar_screen/Cadastro_Sala/CadastroSala';
 import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -49,6 +50,14 @@ export default function App() {
             component={CadastrarScreen}
             options={{
               title: 'Cadastrar Espetáculo',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="CadastroSala"
+            component={CadastroSala}
+            options={{
+              title: 'Cadastrar Sala',
               headerTitleAlign: 'right',
             }}
           />
