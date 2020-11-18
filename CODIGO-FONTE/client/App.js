@@ -8,6 +8,7 @@ import mySaga from './saga/saga';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './features/screens/home_screen/HomeScreen';
+import EscolherTicket from './features/screens/comprar_ticket/EscolherTicket';
 import BuscarScreen from './features/screens/buscar_screen/BuscarScreen';
 import ShowList from './features/screens/buscar_screen/ShowList';
 import CadastrarScreen from './features/screens/cadastrar_screen/CadastrarScreen';
@@ -48,6 +49,14 @@ export default function App() {
             component={CadastrarScreen}
             options={{
               title: 'Cadastrar Espetáculo',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="EscolherTicket"
+            component={EscolherTicket}
+            options={{
+              title: 'Comprar Ticket',
               headerTitleAlign: 'right',
             }}
           />

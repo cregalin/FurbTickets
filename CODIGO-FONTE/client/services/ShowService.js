@@ -4,7 +4,7 @@ import { mockResponse } from '../mock';
 const axios = require('axios');
 
 const fitubServer = axios.create({
-  baseURL: 'https://6f899297d97b.ngrok.io/',
+  baseURL: 'http://f0404a5dc613.ngrok.io',
   timeout: 1000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
@@ -14,10 +14,14 @@ function timeout(ms) {
 }
 
 export async function getShows(params) {
-  await timeout(800)
-  return mockResponse
+  // await timeout(800)
+  // return mockResponse
   let query = paramsToQuery(params)
   return fitubServer.get(`shows${query ? '?' + query : ''}`).then(response => response.data.data);
+}
+
+export async function getShowById(id) {
+  return fitubServer.get(`shows/${id}`)
 }
 
 export function postShow({ title, description, price, troupe }) {

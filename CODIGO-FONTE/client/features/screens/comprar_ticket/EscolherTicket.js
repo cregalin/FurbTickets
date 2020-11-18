@@ -1,28 +1,30 @@
-import React from 'react';
-import { Container } from "../../components/containers/styles";
-import Spectacle from "../../components/Spectacle/Spectacle"
-import Room from "../../components/Room/Room"
+import React, {useState, useEffect} from 'react';
+import { Container } from "components/containers/styles";
+import ShowCard from "components/ShowCard/ShowCard"
+import {Picker, ScrollView} from "react-native"
+import * as TicketConstants from "./ticket-constants"
+import {getShowById} from "baseServices/ShowService"
+import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 
 const EscolherTicket = ({route}) => {
 
   const [tickets, setTickets] = useState([])
   const [spectacle, setSpectacle] = useState(undefined)
-  const [room, setRoom] = useState(undefined)
 
   useEffect(() => {
-    setRoom({})
-  }, [spectacle])
-
-  useEffect(() => {
-    fetch(`https://1ce17fbefec7.ngrok.io/shows/${route.params.spectacleId}`)
-    .then(res => res.json())
+    getShowById(route.params.spectacleId)
     .then(({data}) => setSpectacle(data))
   }, [])
 
   const Ticket = ({ticket}) => {
     return (
       <Container>
-
+        <Picker
+          onValueChange={value => ticket.type = value}>
+          {
+            TicketConstants.types.map(type => <Picket.Item label={type} value={type} />)
+          }
+        </Picker>
       </Container>
     )
   }
@@ -46,10 +48,7 @@ const EscolherTicket = ({route}) => {
   return (
     <Container>
     {
-      spectacle && <Spectacle spectacle={spectacle}/>
-    }
-    {
-      room && <Room room={room}/>
+      spectacle && <ShowCard show={spectacle}/>
     }
     </Container>
   )
