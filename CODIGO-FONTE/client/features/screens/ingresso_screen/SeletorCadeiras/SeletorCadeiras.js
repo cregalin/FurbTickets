@@ -1,10 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { Modal, View } from 'react-native';
+import { View } from 'react-native';
 
 import { StyledText } from '../../../components/texts/styles';
-import { InModalContainer } from '../../buscar_screen/SpectacleListStyles';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
-import SecondaryButton from 'components/buttons/secondary_button/SecondaryButton';
 import Cadeira from './Cadeira';
 
 const SeletorCadeiras = ({ chairList, onSubmit }) => {

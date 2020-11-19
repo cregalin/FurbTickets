@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Image, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image } from 'react-native';
 import {
   chair_taken,
   chair_available,

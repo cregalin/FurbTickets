@@ -1,10 +1,10 @@
-import {paramsToQuery} from 'utils/ShowListParamsUtils'
+import { paramsToQuery } from 'utils/ShowListParamsUtils';
 import { mockResponse } from '../mock';
 
 const axios = require('axios');
 
 const fitubServer = axios.create({
-  baseURL: 'http://f0404a5dc613.ngrok.io',
+  baseURL: 'http://934df17ebedb.ngrok.io/',
   timeout: 1000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
@@ -16,12 +16,18 @@ function timeout(ms) {
 export async function getShows(params) {
   // await timeout(800)
   // return mockResponse
-  let query = paramsToQuery(params)
-  return fitubServer.get(`shows${query ? '?' + query : ''}`).then(response => response.data.data);
+  let query = paramsToQuery(params);
+  return fitubServer
+    .get(`shows${query ? '?' + query : ''}`)
+    .then((response) => response.data.data);
+}
+
+export async function getShow(id) {
+  return fitubServer.get(`shows/${id}`).then((response) => response.data);
 }
 
 export async function getShowById(id) {
-  return fitubServer.get(`shows/${id}`)
+  return fitubServer.get(`shows/${id}`);
 }
 
 export function postShow({ title, description, price, troupe }) {

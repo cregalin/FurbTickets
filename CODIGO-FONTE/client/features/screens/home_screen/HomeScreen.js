@@ -52,6 +52,7 @@ const HomeScreen = () => {
                 key={index}
                 show={show}
                 onPressTicket={(show) => navigation.navigate('Ingresso', show)}
+                onPressDetails={(show) => navigation.navigate('Show', show)}
               />
             );
           })
