@@ -50,7 +50,7 @@ const CadastroSala = () => {
         <StyledTextInput
           placeholder="Descrição..."
           placeholderColor={darkPurple}
-          name="name"
+          name="description"
           control={formProps.control}
           required={true}
           onChangeText={(text) => {
