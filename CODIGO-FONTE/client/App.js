@@ -14,6 +14,7 @@ import ShowList from './features/screens/buscar_screen/ShowList';
 import CadastrarScreen from './features/screens/cadastrar_screen/CadastrarScreen';
 import CadastroSala from './features/screens/cadastrar_screen/Cadastro_Sala/CadastroSala';
 import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
+import SpectacleScreen from './features/screens/spectacle_screen/SpectacleScreen';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
@@ -73,7 +74,15 @@ export default function App() {
             name="Ingresso"
             component={IngressoScreen}
             options={{
-              title: 'Comprar ingresso',
+              title: 'Ingresso',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="Show"
+            component={SpectacleScreen}
+            options={{
+              title: 'Espetáculo',
               headerTitleAlign: 'right',
             }}
           />

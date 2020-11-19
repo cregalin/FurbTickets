@@ -5,7 +5,7 @@ import RowField from 'components/fields/RowField/RowField';
 import { StyledText } from 'components/texts/styles';
 import ShowCardButtons from './ShowCardButtons';
 
-const ShowCard = ({ show, onPressTicket }) => {
+const ShowCard = ({ show, onPressTicket, onPressDetails }) => {
   return (
     <Card>
       <StyledText fontColor="black" fontWeight="bold" fontSize={20}>
@@ -18,7 +18,10 @@ const ShowCard = ({ show, onPressTicket }) => {
         label="Próxima Sessão:"
         value={`${show.session_date} - ${show.session_time}`}
       />
-      <ShowCardButtons onPressDetails={() => {}} onPressTicket={() => onPressTicket(show)} />
+      <ShowCardButtons
+        onPressDetails={() => onPressDetails(show)}
+        onPressTicket={() => onPressTicket(show)}
+      />
     </Card>
   );
 };
