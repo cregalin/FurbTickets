@@ -59,6 +59,11 @@ const HomeScreen = () => {
           })
         )}
       </ScrollContainer>
+      <HomeButtons
+        onPressAdd={() => navigation.navigate('Cadastrar')}
+        onPressRemove={() => {}}
+        onPressSearch={() => navigation.navigate('Buscar')}
+      />
     </Container>
   );
 };
