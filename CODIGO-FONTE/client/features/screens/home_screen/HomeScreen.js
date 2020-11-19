@@ -35,6 +35,7 @@ const HomeScreen = () => {
         onPressAdd={() => navigation.navigate('Cadastrar')}
         onPressRemove={() => {}}
         onPressSearch={() => navigation.navigate('Buscar')}
+        onPressAddRoom={() => navigation.navigate('CadastroSala')}
       />
       <ScrollContainer>
         {open ? (
