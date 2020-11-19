@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseCurrency } from 'helpers';
+import { parseCurrency, parseDateFromPayload } from 'helpers';
 import { Card } from 'components/cards/styles';
 import RowField from 'components/fields/RowField/RowField';
 import { StyledText } from 'components/texts/styles';
@@ -16,7 +16,9 @@ const ShowCard = ({ show, onPressTicket, onPressDetails }) => {
       <RowField label="Sala:" value={show.room_id} />
       <RowField
         label="Próxima Sessão:"
-        value={`${show.session_date} - ${show.session_time}`}
+        value={`${parseDateFromPayload(show.session_date)} - ${
+          show.session_time
+        }`}
       />
       <ShowCardButtons
         onPressDetails={() => onPressDetails(show)}

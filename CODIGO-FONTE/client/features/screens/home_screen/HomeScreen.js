@@ -31,11 +31,6 @@ const HomeScreen = () => {
 
   return (
     <Container>
-      <HomeButtons
-        onPressAdd={() => navigation.navigate('Cadastrar')}
-        onPressRemove={() => {}}
-        onPressSearch={() => navigation.navigate('Buscar')}
-      />
       <ScrollContainer>
         {open ? (
           <LoaderCard
@@ -58,6 +53,11 @@ const HomeScreen = () => {
           })
         )}
       </ScrollContainer>
+      <HomeButtons
+        onPressAdd={() => navigation.navigate('Cadastrar')}
+        onPressRemove={() => {}}
+        onPressSearch={() => navigation.navigate('Buscar')}
+      />
     </Container>
   );
 };
