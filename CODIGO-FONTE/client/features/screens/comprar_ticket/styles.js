@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Container } from "components/containers/styles"
 
 export const Third = styled(Container)`
   width: 30%;

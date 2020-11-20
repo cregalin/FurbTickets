@@ -5,9 +5,11 @@ import { useForm, FormProvider } from 'react-hook-form';
 import {Picker, ScrollView, Text} from "react-native"
 import * as TicketConstants from "./ticket-constants"
 import {getShowById} from "baseServices/ShowService"
+import { darkPurple } from '../../theme/colors';
 import StyledTextInput from 'components/inputs/text_input/TextInput';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 import * as S from "./styles"
+import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
 
 const EscolherTicket = ({route}) => {
 
