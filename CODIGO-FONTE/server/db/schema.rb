@@ -50,4 +50,5 @@ ActiveRecord::Schema.define(version: 20201113232647) do
     t.integer "customer_id"
     t.integer "chair_id"
   end
+
 end
