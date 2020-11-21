@@ -1,5 +1,5 @@
-import 'react-native-gesture-handler';
 import React from 'react';
+import 'react-native-gesture-handler';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
@@ -15,6 +15,7 @@ import CadastrarScreen from './features/screens/cadastrar_screen/CadastrarScreen
 import CadastroSala from './features/screens/cadastrar_screen/Cadastro_Sala/CadastroSala';
 import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
 import SpectacleScreen from './features/screens/spectacle_screen/SpectacleScreen';
+import { CadastroAddSession } from './features/screens/cadastrar_screen/Cadastro_AddSession/CadastroAddSession';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
@@ -83,6 +84,14 @@ export default function App() {
             component={SpectacleScreen}
             options={{
               title: 'Espetáculo',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="Cadastro_AddSession"
+            component={CadastroAddSession}
+            options={{
+              title: 'Sessões',
               headerTitleAlign: 'right',
             }}
           />

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
-} from "@react-navigation/stack";
-import { CadastroView } from "./Cadastro_View/CadastroView";
-import { CadastroAddSession } from "./Cadastro_AddSession/CadastroAddSession";
+} from '@react-navigation/stack';
+import { CadastroView } from './Cadastro_View/CadastroView';
 
 const Stack = createStackNavigator();
 
@@ -15,14 +13,6 @@ const CadastrarScreen = () => {
       <Stack.Screen
         name="Cadastro_View"
         component={CadastroView}
-        options={{
-          headerShown: false,
-          ...TransitionPresets.SlideFromRightIOS,
-        }}
-      />
-      <Stack.Screen
-        name="Cadastro_AddSession"
-        component={CadastroAddSession}
         options={{
           headerShown: false,
           ...TransitionPresets.SlideFromRightIOS,
