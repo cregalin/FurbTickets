@@ -26,10 +26,11 @@ const CadastroView = () => {
 
   const onSubmit = ({ description, price, title, troupe }) => {
     setLoading(true);
-    setError(false)
+    setError(false);
     setOpen(true);
     postShow({ description, price, title, troupe })
       .then((response) => {
+        setOpen(false);
         setLoading(false);
         const showId = response.data.id;
         navigation.navigate('Cadastro_AddSession', { spectacleId: showId });
