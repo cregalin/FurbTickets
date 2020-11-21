@@ -2,17 +2,32 @@ import React, {useState, useEffect} from 'react';
 import { Container } from "components/containers/styles";
 import ShowCard from "components/ShowCard/ShowCard"
 import { useForm, FormProvider } from 'react-hook-form';
-import {Picker, ScrollView, Text} from "react-native"
-import * as TicketConstants from "./ticket-constants"
+import {ScrollView, Text} from "react-native"
+import DropDownPicker from 'react-native-dropdown-picker';
 import {getShowById} from "baseServices/ShowService"
+import { darkPurple } from '../../theme/colors';
 import StyledTextInput from 'components/inputs/text_input/TextInput';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 import * as S from "./styles"
+import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
 
 const EscolherTicket = ({route}) => {
 
   const [tickets, setTickets] = useState([])
   const [spectacle, setSpectacle] = useState(undefined)
+  const types = [{
+    label: "INTEIRA",
+    value: "INTEIRA"
+  },
+  {
+    label: "MEIA",
+    value: "MEIA"
+  },
+  {
+    label: "ESPECIAL",
+    value: "ESPECIAL"
+  }]
+
   const formProps = useForm({
     defaultValues: {
       cpf: '',
@@ -28,17 +43,18 @@ const EscolherTicket = ({route}) => {
   const Ticket = ({ticket}) => {
     return (
       <Container>
-        <S.Third>
-          <Text>{ticket.reference}</Text>
-        </S.Third>
-        <S.Seventh>
-          <Picker
-            onValueChange={value => ticket.type = value}>
-            {
-              TicketConstants.types.map(type => <Picker.Item label={type} value={type} />)
-            }
-          </Picker>
-        </S.Seventh>
+        <Text>{ticket.reference}</Text>
+        <DropDownPicker
+          items={types}
+          defaultValue={"INTEIRA"}
+          itemStyle={{
+              justifyContent: 'flex-start'
+          }}
+          style={{backgroundColor: '#fafafa'}}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          containerStyle={{height: 70, width: 300, }}
+          onChangeItem={item => ticket.type = item.value}
+           />
       </Container>
     )
   }
@@ -52,7 +68,7 @@ const EscolherTicket = ({route}) => {
     return (
       <ScrollView>
       {
-        route.params.selectedChairs.map(ticket => <Ticket ticket={ticket} />)
+        route.params.selectedChairs.map(ticket => <Ticket key={ticket.reference} ticket={ticket} />)
       }
       </ScrollView>
     )
