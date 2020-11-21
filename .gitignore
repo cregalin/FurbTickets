@@ -4,3 +4,4 @@ CODIGO-FONTE/server/log/development.log
 2020-08-28 - aula02 - desenvolvimento hello world/hello-world/server/tmp/restart.txt
 CODIGO-FONTE/server/tmp/restart.txt
 CODIGO-FONTE/server/tmp/pids/server.pid
+CODIGO-FONTE/server/config/environments/development.rb
