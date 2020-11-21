@@ -5,3 +5,4 @@ CODIGO-FONTE/server/log/development.log
 CODIGO-FONTE/server/tmp/restart.txt
 CODIGO-FONTE/server/tmp/pids/server.pid
 CODIGO-FONTE/server/config/environments/development.rb
+CODIGO-FONTE/server/.byebug_history
