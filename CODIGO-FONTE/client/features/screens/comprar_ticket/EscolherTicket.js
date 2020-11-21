@@ -40,7 +40,7 @@ const EscolherTicket = ({route}) => {
     .then(({data}) => setSpectacle(data.show))
   }, [])
 
-  const Ticket = ({ticket}) => {
+  const Ticket = ({ticket, index}) => {
     return (
       <>
         <Text>{ticket.reference}</Text>
@@ -50,9 +50,9 @@ const EscolherTicket = ({route}) => {
           itemStyle={{
               justifyContent: 'flex-start'
           }}
-          style={{backgroundColor: '#fafafa'}}
-          dropDownStyle={{backgroundColor: '#fafafa'}}
-          containerStyle={{height: 70, width: 300, overflow: 'scroll'}}
+          style={{backgroundColor: '#fafafa', marginTop: 10, zIndex: index * 10}}
+          dropDownStyle={{backgroundColor: '#fafafa', zIndex: 10, position: 'absolute'}}
+          containerStyle={{height: 70, width: 300, overflow: 'scroll', zIndex: 999}}
           onChangeItem={item => ticket.type = item.value}
            />
       </>
@@ -68,7 +68,7 @@ const EscolherTicket = ({route}) => {
     return (
       <ScrollView>
       {
-        route.params.selectedChairs.map(ticket => <Ticket key={ticket.reference} ticket={ticket} />)
+        route.params.selectedChairs.map((ticket, index) => <Ticket index={index} key={ticket.reference} ticket={ticket} />)
       }
       </ScrollView>
     )
