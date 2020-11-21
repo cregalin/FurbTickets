@@ -14,7 +14,7 @@ class Ticket < ApplicationRecord
 	validate :can_be_purchased
 
 	def send_ticket
-		TicketMailer.send_ticket(customer.email, self).deliver_now
+		TicketMailer.send_ticket(customer.email, self).deliver_later
 	end
 
 	def can_be_purchased
@@ -33,8 +33,8 @@ class Ticket < ApplicationRecord
   end
 
   def generate_code
-    loop do
-      code = SecureRandom.hex(3)
+		loop do
+			code = SecureRandom.hex(4)
       break code unless Ticket.where(code: code).exists?
     end
   end
