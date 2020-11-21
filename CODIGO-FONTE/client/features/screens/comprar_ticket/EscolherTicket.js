@@ -52,7 +52,7 @@ const EscolherTicket = ({route}) => {
           }}
           style={{backgroundColor: '#fafafa'}}
           dropDownStyle={{backgroundColor: '#fafafa'}}
-          containerStyle={{height: 70, width: 300, }}
+          containerStyle={{height: 70, width: 300, overflow: 'scroll'}}
           onChangeItem={item => ticket.type = item.value}
            />
       </Container>
