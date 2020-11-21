@@ -42,7 +42,7 @@ const EscolherTicket = ({route}) => {
 
   const Ticket = ({ticket}) => {
     return (
-      <Container>
+      <>
         <Text>{ticket.reference}</Text>
         <DropDownPicker
           items={types}
@@ -55,7 +55,7 @@ const EscolherTicket = ({route}) => {
           containerStyle={{height: 70, width: 300, overflow: 'scroll'}}
           onChangeItem={item => ticket.type = item.value}
            />
-      </Container>
+      </>
     )
   }
 
