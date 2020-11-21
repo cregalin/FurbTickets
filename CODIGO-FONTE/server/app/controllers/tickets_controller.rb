@@ -13,8 +13,8 @@ class TicketsController < ApplicationController
     tickets = []
     errors = []
 
-    ticket_params[:chair_ids].each do |chair_id|
-      ticket = Ticket.new({ session_id: ticket_params[:session_id], chair_id: chair_id, customer_id: customer.id })
+    ticket_params[:tickets].each do |ticket|
+      ticket = Ticket.new({ session_id: ticket_params[:session_id], chair_id: ticket[:chair_id], ticket_type: ticket[:ticket_type], customer_id: customer.id })
 
       if ticket.save
         tickets << ticket
@@ -24,7 +24,7 @@ class TicketsController < ApplicationController
     end
 
     if errors.present?
-      render json: errors.joins('</br>'), status: :unprocessable_entity
+      render json: errors.map(&:full_messages).join('</br>'), status: :unprocessable_entity
     else
       render json: { ticket_ids: tickets.pluck(:id).join(',') }, status: :ok
     end
@@ -58,6 +58,6 @@ class TicketsController < ApplicationController
     end
 
     def ticket_params
-      params.permit(:session_id, :cpf, :email, chair_ids: [])
+      params.permit(:session_id, :cpf, :email, tickets: [:chair_id, :ticket_type])
     end
 end

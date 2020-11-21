@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201120232722) do
+ActiveRecord::Schema.define(version: 20201121010425) do
 
   create_table "chairs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string  "reference"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20201120232722) do
     t.integer "customer_id"
     t.integer "chair_id"
     t.string  "code"
+    t.integer "ticket_type"
   end
 
 end
