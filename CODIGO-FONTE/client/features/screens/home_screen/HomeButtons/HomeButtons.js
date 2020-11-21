@@ -1,8 +1,20 @@
 import React from 'react';
 import { View } from 'react-native';
 import Anchor from 'components/buttons/anchor/Anchor';
+import IconButton from '../../../components/buttons/icon_button/IconButton';
+import {
+  chair_available,
+  search_icon,
+  theater_icon,
+  ticket_icon,
+} from '../../../../assets/images';
 
-const HomeButtons = ({ onPressRemove, onPressAdd, onPressSearch }) => {
+const HomeButtons = ({
+  onPressRemove,
+  onPressAdd,
+  onPressSearch,
+  onPressAddRoom,
+}) => {
   return (
     <View
       style={{
@@ -14,16 +26,20 @@ const HomeButtons = ({ onPressRemove, onPressAdd, onPressSearch }) => {
       }}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Anchor
-          label="Adicionar espetáculo"
+        <IconButton
+          icon={theater_icon}
+          label="Espetáculo"
           onPress={onPressAdd}
-          borderRightWidth={1}
         />
-        {/* <Anchor label="Remover espetáculo" onPress={onPressRemove} /> */}
-        <Anchor
-          textAlign="left"
-          label="Pesquisar espetáculo"
-          onPress={onPressSearch}
+        <IconButton icon={search_icon} label="Buscar" onPress={onPressSearch} />
+        <IconButton
+          icon={chair_available}
+          label="Sala"
+          onPress={onPressAddRoom}
+        />
+        <IconButton
+          icon={ticket_icon}
+          label="Validar"
         />
       </View>
     </View>

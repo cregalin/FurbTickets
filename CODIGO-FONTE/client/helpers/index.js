@@ -9,6 +9,10 @@ export function parseDateFromPayload(date) {
   return newDate;
 }
 
+export function parseTimeFromPayload(time) {
+  return `${new Date(time).getUTCHours()}:${new Date(time).getUTCMinutes()}`;
+}
+
 export function parseDateToPayload(date) {
   const parts = date.split('/');
   const newDate = `${parts[2]}-${parts[1]}-${parts[0]}`;

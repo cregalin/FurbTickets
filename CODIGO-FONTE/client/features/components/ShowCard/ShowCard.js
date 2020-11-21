@@ -14,12 +14,6 @@ const ShowCard = ({ show, onPressTicket, onPressDetails }) => {
       <RowField label="Preço:" value={parseCurrency(show.price)} />
       <RowField label="Trupe:" value={show.troupe} />
       <RowField label="Sala:" value={show.room_id} />
-      <RowField
-        label="Próxima Sessão:"
-        value={`${parseDateFromPayload(show.session_date)} - ${
-          show.session_time
-        }`}
-      />
       <ShowCardButtons
         onPressDetails={() => onPressDetails(show)}
         onPressTicket={() => onPressTicket(show)}

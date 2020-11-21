@@ -7,7 +7,11 @@ import { StyledText } from '../../components/texts/styles';
 import { Card } from '../../components/cards/styles';
 import { getShow } from '../../../services/ShowService';
 import RowField from '../../components/fields/RowField/RowField';
-import { parseCurrency, parseDateFromPayload } from '../../../helpers';
+import {
+  parseCurrency,
+  parseDateFromPayload,
+  parseTimeFromPayload,
+} from '../../../helpers';
 import SecondaryButton from '../../components/buttons/secondary_button/SecondaryButton';
 
 const SpectacleScreen = () => {
@@ -26,6 +30,7 @@ const SpectacleScreen = () => {
     setOpen(true);
     setLoading(true);
     const { sessions_attributes, show } = await getShow(id);
+    setLoading(false);
     if (!sessions_attributes && !show) setError(true);
     else {
       setShow(show);
@@ -97,9 +102,7 @@ const SpectacleScreen = () => {
                   />
                   <RowField
                     label="Hora:"
-                    value={`${new Date(session.time).getUTCHours()}:${new Date(
-                      session.time
-                    ).getUTCMinutes()}`}
+                    value={parseTimeFromPayload(session.time)}
                   />
                 </View>
               );
@@ -135,7 +138,20 @@ const SpectacleScreen = () => {
         <SecondaryButton
           label="Ingresso"
           width="90%"
-          onPress={() => navigation.navigate('Ingresso', show)}
+          onPress={() => {
+            if (!loading && !error) navigation.navigate('Ingresso', show);
+          }}
+        />
+        <SecondaryButton
+          label="Adicionar sessões"
+          width="90%"
+          onPress={() => {
+            if (!loading && !error)
+              navigation.navigate('Cadastro_AddSession', {
+                spectacleId: show.id,
+                sessions: sessions,
+              });
+          }}
         />
       </View>
     </Fragment>

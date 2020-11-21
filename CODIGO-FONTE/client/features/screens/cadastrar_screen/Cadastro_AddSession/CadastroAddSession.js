@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -14,6 +14,10 @@ import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 import { LoaderCard } from 'components/cards/LoaderCard/LoaderCard';
 
 import { StyledScrollView, ModalContainer, InModalContainer } from './styles';
+import {
+  parseDateFromPayload,
+  parseTimeFromPayload,
+} from '../../../../helpers';
 
 const CadastroAddSession = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -21,7 +25,7 @@ const CadastroAddSession = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { spectacleId } = route.params;
+  const { spectacleId, sessions } = route.params;
 
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
@@ -37,6 +41,18 @@ const CadastroAddSession = () => {
       time: '',
     },
   });
+
+  useEffect(() => {
+    if (sessions && !sessionAttributes.length) {
+      const localSessions = sessions.map((session) => {
+        return {
+          date: parseDateFromPayload(session.date),
+          time: parseTimeFromPayload(session.time),
+        };
+      });
+      setSessionAttributes(localSessions);
+    }
+  }, []);
 
   const onSave = async () => {
     setOpen(true);
@@ -89,7 +105,7 @@ const CadastroAddSession = () => {
         onCloseModal={() => setOpen(false)}
       />
       <StyledScrollView>
-        {sessionAttributes.length > 0 ? (
+        {sessionAttributes.length ? (
           sessionAttributes.map((session, index) => (
             <SessionCard
               key={index}

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { getShows } from 'baseServices/ShowService';
 import { useNavigation } from '@react-navigation/native';
@@ -25,40 +26,52 @@ const HomeScreen = () => {
     else setShows(showsResponse);
   };
 
-  useEffect(() => {
-    fetchShows();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      let isActive = true;
+
+      fetchShows();
+
+      return () => {
+        isActive = false;
+      };
+    }, [])
+  );
 
   return (
-    <Container>
-      <ScrollContainer>
-        {open ? (
-          <LoaderCard
-            text="Buscando sessões..."
-            error={error}
-            loading={loading}
-            onCloseModal={() => setOpen(false)}
-            open={open}
-          />
-        ) : (
-          shows?.map((show, index) => {
-            return (
-              <ShowCard
-                key={index}
-                show={show}
-                onPressTicket={(show) => navigation.navigate('Ingresso', show)}
-                onPressDetails={(show) => navigation.navigate('Show', show)}
-              />
-            );
-          })
-        )}
-      </ScrollContainer>
+    <Fragment>
+      <Container height="90%">
+        <ScrollContainer>
+          {open ? (
+            <LoaderCard
+              text="Buscando sessões..."
+              error={error}
+              loading={loading}
+              onCloseModal={() => setOpen(false)}
+              open={open}
+            />
+          ) : (
+            shows?.map((show, index) => {
+              return (
+                <ShowCard
+                  key={index}
+                  show={show}
+                  onPressTicket={(show) =>
+                    navigation.navigate('Ingresso', show)
+                  }
+                  onPressDetails={(show) => navigation.navigate('Show', show)}
+                />
+              );
+            })
+          )}
+        </ScrollContainer>
+      </Container>
       <HomeButtons
         onPressAdd={() => navigation.navigate('Cadastrar')}
         onPressRemove={() => {}}
         onPressSearch={() => navigation.navigate('Buscar')}
       />
-    </Container>
+    </Fragment>
   );
 };
 
