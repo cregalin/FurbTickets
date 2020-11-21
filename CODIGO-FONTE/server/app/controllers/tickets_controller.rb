@@ -24,7 +24,7 @@ class TicketsController < ApplicationController
     end
 
     if errors.present?
-      render json: errors.map(&:full_messages).join('</br>'), status: :unprocessable_entity
+      render json: errors.map { |error| error.messages[:error] }.join('</br>'), status: :unprocessable_entity
     else
       render json: { ticket_ids: tickets.pluck(:id).join(',') }, status: :ok
     end

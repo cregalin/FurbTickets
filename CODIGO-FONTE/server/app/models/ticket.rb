@@ -11,9 +11,19 @@ class Ticket < ApplicationRecord
 	before_create :set_code
 	after_create :send_ticket
 	validates :session_id, :customer_id, :chair_id, :ticket_type, presence: true
+	validate :can_be_purchased
 
 	def send_ticket
 		TicketMailer.send_ticket(customer.email, self).deliver_now
+	end
+
+	def can_be_purchased
+		if Ticket.where(chair_id: chair_id, session_id: session_id).count > 0
+			errors.add(:error, "Não é possível comprar o ingresso para a cadeira id: #{ chair_id }, essa cadeira já está ocupada.")
+			return false
+		end
+
+		true
 	end
 
 	private
