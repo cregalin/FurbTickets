@@ -42,6 +42,16 @@ class TicketsController < ApplicationController
     @ticket.destroy
   end
 
+  def validate
+    ticket = Ticket.where(code: params[:code])
+
+    if ticket.count > 0
+      render json: { message: 'Ticket validado com sucesso' }, status: :ok
+    else
+      render json: { message: 'Esse ticket não é válido'}, status: :unprocessable_entity
+    end
+  end
+
   private
     def set_ticket
       @ticket = Ticket.find(params[:id])
