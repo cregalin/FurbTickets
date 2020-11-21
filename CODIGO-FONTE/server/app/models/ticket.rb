@@ -6,9 +6,23 @@ class Ticket < ApplicationRecord
 	belongs_to :chair
 	accepts_nested_attributes_for :customer
 
-	# after_create :send_ticket
+	before_create :set_code
+	after_create :send_ticket
 
-	# def send_ticket
-	# 	TicketsMailer.send_email(customer.email, self)
-	# end
+	def send_ticket
+		TicketMailer.send_ticket(customer.email, self).deliver_now
+	end
+
+	private
+
+  def set_code
+    self.code = generate_code
+  end
+
+  def generate_code
+    loop do
+      code = SecureRandom.hex(3)
+      break code unless Ticket.where(code: code).exists?
+    end
+  end
 end
