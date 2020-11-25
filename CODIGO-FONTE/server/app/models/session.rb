@@ -1,6 +1,6 @@
 class Session < ApplicationRecord
-  belongs_to :shows
-  belongs_to :rooms
+  belongs_to :show
+  belongs_to :room
 
   validates :date, :time, presence: true
 end
