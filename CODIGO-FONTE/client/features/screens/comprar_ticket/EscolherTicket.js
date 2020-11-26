@@ -45,14 +45,15 @@ const EscolherTicket = ({route}) => {
       <>
         <Text>{ticket.reference}</Text>
         <DropDownPicker
+          zIndex={(index + 1) * 1000}
           items={types}
           defaultValue={"INTEIRA"}
           itemStyle={{
               justifyContent: 'flex-start'
           }}
-          style={{backgroundColor: '#fafafa', marginTop: 10, zIndex: index * 10}}
-          dropDownStyle={{backgroundColor: '#fafafa', zIndex: 10, position: 'absolute'}}
-          containerStyle={{height: 70, width: 300, overflow: 'scroll', zIndex: 999}}
+          style={{backgroundColor: '#fafafa', marginTop: 10}}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          containerStyle={{height: 70, width: 300}}
           onChangeItem={item => ticket.type = item.value}
            />
       </>
@@ -66,7 +67,11 @@ const EscolherTicket = ({route}) => {
 
   const Tickets = () => {
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'flex-start',
+          paddingBottom: 200
+      }}>
       {
         route.params.selectedChairs.map((ticket, index) => <Ticket index={index} key={ticket.reference} ticket={ticket} />)
       }
@@ -75,7 +80,7 @@ const EscolherTicket = ({route}) => {
   }
 
   return (
-    <Container>
+    <Container height={'100%'}>
       <FormProvider>
         <StyledTextInput
           placeholder="Nome..."
