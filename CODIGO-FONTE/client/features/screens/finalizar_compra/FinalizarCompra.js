@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text  } from 'react-native'
+import {View, Text } from 'react-native'
 import { getShowById } from 'baseServices/ShowService';
 import { confirmTickets, saveTickets } from 'baseServices/ShowService';
 import SecondaryButton from 'components/buttons/secondary_button/SecondaryButton';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
+import RowField from 'components/fields/RowField/RowField';
+import {Title} from 'components/texts/styles'
+import {
+  parseCurrency,
+  parseDateFromPayload,
+  parseTimeFromPayload,
+} from 'helpers';
 
 const FinalizarCompra = ({route}) => {
 
@@ -44,17 +51,37 @@ const FinalizarCompra = ({route}) => {
 
   return (
     <View>
-      <Text>Valor Total: R${totalPrice.toFixed(2)}</Text>
-      <SecondaryButton
-        label="Voltar"
-        width="40%"
-        onPress={handleCancel}
-      />
-      <PrimaryButton
-        label="Comprar"
-        width="40%"
-        onPress={handleConfirmBuy}
-      />
+      <Title>{show ? show.title : ''}</Title>
+      { session && (
+        <View
+          style={{ width: '100%', borderTopWidth: 1, padding: 10 }}
+        >
+          <RowField
+            label="Data:"
+            value={parseDateFromPayload(session.date)}
+          />
+          <RowField
+            label="Hora:"
+            value={parseTimeFromPayload(session.time)}
+          />
+          <RowField
+            label="Valor Total:"
+            value={`R$ ${totalPrice.toFixed(2)}`}
+          />
+        </View>
+      )}
+      <View style={{display: 'flex'}}>
+        <SecondaryButton
+          label="Voltar"
+          width="40%"
+          onPress={handleCancel}
+        />
+        <PrimaryButton
+          label="Comprar"
+          width="40%"
+          onPress={handleConfirmBuy}
+        />
+      </View>
     </View>
   )
 }

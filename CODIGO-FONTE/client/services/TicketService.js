@@ -3,7 +3,7 @@ import {paramsToQuery} from 'utils/ShowListParamsUtils'
 const axios = require('axios');
 
 const fitubServer = axios.create({
-  baseURL: 'http://47006f10bd4c.ngrok.io',
+  baseURL: 'https://94f93266807e.ngrok.io',
   timeout: 1000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
