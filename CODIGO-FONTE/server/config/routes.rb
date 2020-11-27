@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :tickets
   get 'sessions(/:id)/chairs', to: 'sessions#chairs'
   get 'tickets(/:code)/validate', to: 'tickets#validate'
+  post 'tickets/confirm', to: 'tickets#confirm'
 end
