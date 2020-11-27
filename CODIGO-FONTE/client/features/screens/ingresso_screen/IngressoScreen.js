@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from '../buscar_screen/SpectacleListStyles';
 import { ScrollContainer } from 'components/containers/styles';
-import SeletorCadeiras from './SeletorCadeiras/SeletorCadeiras';
+import SeletorCadeiras from 'components/SeletorCadeiras/SeletorCadeiras';
 import { mockChairs } from '../../../mock';
 import { useNavigation } from '@react-navigation/native';
 import { LoaderCard } from '../../components/cards/LoaderCard/LoaderCard';
@@ -28,13 +28,10 @@ const IngressoScreen = ({ route }) => {
     setModalOpen(false);
   };
 
-  const onPressSession = async (sessionId) => {
-    setModalOpen(true);
-    setLoading(true);
-    const data = await getChairs(sessionId);
-    setLoading(false);
-    setModalOpen(false);
-    console.log(data);
+  const onPressSession = (sessionId) => {
+    navigation.navigate('EscolherCadeira', {
+      sessionId
+    });
   };
 
   useEffect(() => {
@@ -66,6 +63,7 @@ const IngressoScreen = ({ route }) => {
             date={parseDateFromPayload(session.date)}
             time={parseTimeFromPayload(session.time)}
             onPress={onPressSession}
+            onPressBuy={onPressSession}
           />
         ))
       )}

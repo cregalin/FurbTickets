@@ -11,6 +11,7 @@ const SessionCard = ({
   roomName,
   choosing,
   onPress,
+  onPressBuy,
   id,
 }) => {
   return (
@@ -38,7 +39,7 @@ const SessionCard = ({
       {!choosing ? (
         <SecondaryButton label="Remover" onPress={() => onPress(index)} />
       ) : (
-        <SecondaryButton label="Comprar" onPress={() => onPress(id)} />
+        <SecondaryButton label="Comprar" onPress={() => onPressBuy(id)} />
       )}
     </CardContainer>
   );
