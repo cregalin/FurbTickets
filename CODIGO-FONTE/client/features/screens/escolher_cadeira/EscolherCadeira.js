@@ -13,7 +13,7 @@ const EscolherCadeira = ({route}) => {
     getChairs(sessionId).then(resp => {
       setChairs(resp.data)
     })
-  }, sessionId)
+  }, [sessionId])
 
   const onSubmit = (selectedChairs) => {
     navigation.navigate('EscolherTicket', {

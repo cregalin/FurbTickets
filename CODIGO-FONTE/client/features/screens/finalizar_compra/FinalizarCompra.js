@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text } from 'react-native'
 import { getShowById } from 'baseServices/ShowService';
-import { confirmTickets, saveTickets } from 'baseServices/ShowService';
+import { confirmTickets, saveTickets } from 'baseServices/TicketService';
 import SecondaryButton from 'components/buttons/secondary_button/SecondaryButton';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 import RowField from 'components/fields/RowField/RowField';
+import { useNavigation } from '@react-navigation/native';
 import {Title} from 'components/texts/styles'
 import {
   parseCurrency,
@@ -13,6 +14,7 @@ import {
 } from 'helpers';
 
 const FinalizarCompra = ({route}) => {
+  const navigation = useNavigation();
 
   const {sessionId, tickets, cpf, email, showId} = route.params
 
@@ -22,10 +24,8 @@ const FinalizarCompra = ({route}) => {
 
   const fetchSessions = async () => {
     const data = await getShowById(showId);
-    console.log(data.show)
     setShow(data.show)
     setSession(data.sessions_attributes.find(sess => sess.id == sessionId))
-    console.log(show)
   };
 
   useEffect(() => {
@@ -42,7 +42,24 @@ const FinalizarCompra = ({route}) => {
   }, [show])
 
   const handleConfirmBuy = () => {
-
+    let payload = {
+      session_id: sessionId,
+      tickets: tickets.map(ticket => {
+        return {
+          ticket_type: ticket.ticket_type
+        }
+      })
+    }
+    confirmTickets(payload).then(resp => {
+      saveTickets({
+        session_id: sessionId,
+        email,
+        cpf,
+        tickets
+      })
+    }).then(resp => {
+      navigation.navigate("CompraFinalizada")
+    })
   }
 
   const handleCancel = () => {
@@ -51,7 +68,9 @@ const FinalizarCompra = ({route}) => {
 
   return (
     <View>
-      <Title>{show ? show.title : ''}</Title>
+      <View style={{display: "flex", justifyContent: "center", alignItems: "center", padding: 20}}>
+        <Title>{show ? show.title : ''}</Title>
+      </View>
       { session && (
         <View
           style={{ width: '100%', borderTopWidth: 1, padding: 10 }}
@@ -70,7 +89,7 @@ const FinalizarCompra = ({route}) => {
           />
         </View>
       )}
-      <View style={{display: 'flex'}}>
+      <View style={{display: 'flex', flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
         <SecondaryButton
           label="Voltar"
           width="40%"
