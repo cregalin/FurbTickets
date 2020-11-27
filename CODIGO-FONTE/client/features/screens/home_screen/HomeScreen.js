@@ -72,7 +72,7 @@ const HomeScreen = () => {
       </Container>
       <HomeButtons
         onPressAdd={() => navigation.navigate('CadastrarEspetaculo')}
-        onPressRemove={() => {}}
+        onPressValidate={() => navigation.navigate('Validar')}
         onPressSearch={() => navigation.navigate('Buscar')}
         onPressAddRoom={() => navigation.navigate('CadastrarSala')}
       />

@@ -3,9 +3,9 @@ import { mockResponse } from '../mock';
 
 const axios = require('axios');
 
-const fitubServer = axios.create({
-  baseURL: 'http://47006f10bd4c.ngrok.io',
-  timeout: 1000,
+export const fitubServer = axios.create({
+  baseURL: 'http://eff6a6d89f5d.ngrok.io/',
+  timeout: 3000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
 

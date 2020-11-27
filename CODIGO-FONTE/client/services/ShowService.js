@@ -1,13 +1,6 @@
 import { paramsToQuery } from 'utils/ShowListParamsUtils';
 import { mockResponse } from '../mock';
-
-const axios = require('axios');
-
-const fitubServer = axios.create({
-  baseURL: 'http://47006f10bd4c.ngrok.io/',
-  timeout: 3000,
-  headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-});
+import { fitubServer } from './RoomService';
 
 function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -42,15 +35,8 @@ export async function getChairs(sessionId) {
   }
 }
 
-export async function getShow(id) {
-  try {
-    return fitubServer.get(`shows/${id}`).then((response) => response.data);
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
 export async function getShowById(id) {
+  console.log(id);
   try {
     return fitubServer.get(`shows/${id}`).then((response) => response.data);
   } catch (error) {

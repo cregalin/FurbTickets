@@ -4,6 +4,7 @@ import { StyledLoaderCard } from './card/styles';
 import { StyledText } from '../../texts/styles';
 import SecondaryButton from '../../buttons/secondary_button/SecondaryButton';
 import { color } from 'react-native-reanimated';
+import { ModalContainer } from '../../../screens/cadastrar_screen/Cadastro_AddSession/styles';
 
 const LoaderCard = ({
   text = 'Enviando...',
@@ -14,7 +15,7 @@ const LoaderCard = ({
 }) => {
   return (
     <Modal
-      visible={open && loading | error}
+      visible={open && (loading || error)}
       animationType="fade"
       transparent={true}
       style={{
@@ -23,15 +24,17 @@ const LoaderCard = ({
         flexDirection: 'column',
       }}
     >
-      <StyledLoaderCard>
-        {loading ? <StyledText>{text}</StyledText> : null}
-        {error && (
-          <Fragment>
-            <StyledText>Ocorreu um erro.</StyledText>
-            <SecondaryButton label="Fechar" onPress={onCloseModal} />
-          </Fragment>
-        )}
-      </StyledLoaderCard>
+      <ModalContainer>
+        <StyledLoaderCard>
+          {loading ? <StyledText>{text}</StyledText> : null}
+          {error && (
+            <Fragment>
+              <StyledText>Ocorreu um erro.</StyledText>
+              <SecondaryButton label="Fechar" onPress={onCloseModal} />
+            </Fragment>
+          )}
+        </StyledLoaderCard>
+      </ModalContainer>
     </Modal>
   );
 };

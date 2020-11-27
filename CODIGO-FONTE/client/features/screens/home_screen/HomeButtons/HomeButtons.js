@@ -10,7 +10,7 @@ import {
 } from '../../../../assets/images';
 
 const HomeButtons = ({
-  onPressRemove,
+  onPressValidate,
   onPressAdd,
   onPressSearch,
   onPressAddRoom,
@@ -40,6 +40,7 @@ const HomeButtons = ({
         <IconButton
           icon={ticket_icon}
           label="Validar"
+          onPress={onPressValidate}
         />
       </View>
     </View>

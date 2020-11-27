@@ -5,7 +5,7 @@ import { ScrollView, View } from 'react-native';
 import { LoaderCard } from '../../components/cards/LoaderCard/LoaderCard';
 import { StyledText } from '../../components/texts/styles';
 import { Card } from '../../components/cards/styles';
-import { getShow } from '../../../services/ShowService';
+import { getShowById } from '../../../services/ShowService';
 import RowField from '../../components/fields/RowField/RowField';
 import {
   parseCurrency,
@@ -30,7 +30,7 @@ const SpectacleScreen = () => {
     try {
       setOpen(true);
       setLoading(true);
-      const { sessions_attributes, show } = await getShow(id);
+      const { sessions_attributes, show } = await getShowById(id);
       setShow(show);
       setSessions(sessions_attributes);
       setOpen(false);

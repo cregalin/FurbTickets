@@ -20,6 +20,7 @@ import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
 import SpectacleScreen from './features/screens/spectacle_screen/SpectacleScreen';
 import { CadastroAddSession } from './features/screens/cadastrar_screen/Cadastro_AddSession/CadastroAddSession';
 import { CadastroView } from './features/screens/cadastrar_screen/Cadastro_View/CadastroView';
+import ValidarScreen from './features/screens/validar_screen/ValidarScreen';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
@@ -104,6 +105,14 @@ export default function App() {
             component={CadastroAddSession}
             options={{
               title: 'Sessões',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="Validar"
+            component={ValidarScreen}
+            option={{
+              title: 'Validar Ingresso',
               headerTitleAlign: 'right',
             }}
           />

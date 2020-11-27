@@ -1,17 +1,27 @@
-import {paramsToQuery} from 'utils/ShowListParamsUtils'
+import { fitubServer } from './RoomService';
 
-const axios = require('axios');
-
-const fitubServer = axios.create({
-  baseURL: 'http://47006f10bd4c.ngrok.io',
-  timeout: 1000,
-  headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-});
+export const validateTicket = (code) => {
+  try {
+    return fitubServer.get(`/tickets/${code}/validate`).then(({ data }) => {
+      return data.valid;
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 export const confirmTickets = (payload) => {
-  return fitubServer.post('/tickets/confirm', payload)
-}
+  try {
+    return fitubServer.post('/tickets/confirm', payload);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 export const saveTickets = (payload) => {
-  return fitubServer.post('/tickets', payload)
-}
+  try {
+    return fitubServer.post('/tickets', payload);
+  } catch (error) {
+    throw new Error();
+  }
+};
