@@ -18,6 +18,7 @@ import EscolherCadeira from './features/screens/escolher_cadeira/EscolherCadeira
 import CadastroSala from './features/screens/cadastrar_screen/Cadastro_Sala/CadastroSala';
 import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
 import SpectacleScreen from './features/screens/spectacle_screen/SpectacleScreen';
+import FinalizarCompra from './features/screens/finalizar_compra/FinalizarCompra';
 import { CadastroAddSession } from './features/screens/cadastrar_screen/Cadastro_AddSession/CadastroAddSession';
 import { CadastroView } from './features/screens/cadastrar_screen/Cadastro_View/CadastroView';
 
@@ -72,6 +73,14 @@ export default function App() {
             component={EscolherTicket}
             options={{
               title: 'Comprar Ticket',
+              headerTitleAlign: 'right',
+            }}
+          />
+          <Stack.Screen
+            name="FinalizarCompra"
+            component={FinalizarCompra}
+            options={{
+              title: 'Finalizar Compra',
               headerTitleAlign: 'right',
             }}
           />

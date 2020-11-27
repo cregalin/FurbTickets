@@ -11,15 +11,13 @@ const SeletorCadeiras = ({ chairList, onSubmit }) => {
   const onSelectChair = (chairId) => {
     setSelectedChairs([
       ...selectedChairs,
-      {
-        reference: chairId,
-      },
+      chairList.find(chair => chair.id == chairId),
     ]);
   };
 
   const onDeselectChair = (chairId) => {
     setSelectedChairs(
-      selectedChairs.filter((chair) => chair.reference !== chairId)
+      selectedChairs.filter((chair) => chair.id !== chairId)
     );
   };
 
@@ -47,8 +45,8 @@ const SeletorCadeiras = ({ chairList, onSubmit }) => {
             status={chair.status}
             onSelect={onSelectChair}
             onDeselect={onDeselectChair}
-            chairId={chair.reference}
-            key={chair.reference}
+            chairId={chair.id}
+            key={chair.id}
           />
         ))}
       </View>
