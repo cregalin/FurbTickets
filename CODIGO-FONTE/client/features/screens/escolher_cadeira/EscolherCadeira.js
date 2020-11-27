@@ -6,17 +6,18 @@ import SeletorCadeiras from 'components/SeletorCadeiras/SeletorCadeiras';
 const EscolherCadeira = ({ route }) => {
   const navigation = useNavigation();
 
-  const { sessionId } = route.params;
-  const [chairs, setChairs] = useState([]);
+  const {sessionId, id} = route.params
+  const [chairs, setChairs] = useState([])
 
   useEffect(() => {
-    getChairs(sessionId).then((resp) => {
-      setChairs(resp.data);
-    });
-  }, [sessionId]);
+    getChairs(sessionId).then(resp => {
+      setChairs(resp.data)
+    })
+  }, [sessionId])
 
   const onSubmit = (selectedChairs) => {
     navigation.navigate('EscolherTicket', {
+      id,
       sessionId,
       selectedChairs,
     });

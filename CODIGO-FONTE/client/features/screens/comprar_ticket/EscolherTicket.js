@@ -8,29 +8,30 @@ import {getShowById} from "baseServices/ShowService"
 import { darkPurple } from '../../theme/colors';
 import StyledTextInput from 'components/inputs/text_input/TextInput';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
+import { useNavigation } from '@react-navigation/native';
 import * as S from "./styles"
 import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
-import { confirmTickets, saveTickets } from 'baseServices/ShowService';
 
 const EscolherTicket = ({route}) => {
+const navigation = useNavigation();
 
   const [tickets, setTickets] = useState(route.params.selectedChairs)
-  const [spectacle, setSpectacle] = useState(undefined)
   const [cpf, setCpf] = useState('')
 
   const onSaveTicket = ({email}) => {
     let payload = {
       email,
       cpf,
-      session_id: spectacle.id,
+      showId: route.params.id,
+      sessionId: route.params.sessionId,
       tickets: tickets.map(ticket => {
         return {
           chair_id: ticket.id,
-          ticket_type: ticket.ticket_type
+          ticket_type: ticket.ticket_type || 2
         }
       })
     }
-    confirmTickets({session_id: payload.session_id, tickets: payload.tickets}).then(() => saveTickets(payload))
+    navigation.navigate("FinalizarCompra", payload)
   }
 
   const formProps = useForm({
@@ -47,11 +48,6 @@ const EscolherTicket = ({route}) => {
     label: "MEIA",
     value: 1
   },]
-
-  useEffect(() => {
-    getShowById(route.params.spectacleId)
-    .then(({data}) => setSpectacle(data.show))
-  }, [])
 
   const Ticket = ({ticket, index}) => {
     return (

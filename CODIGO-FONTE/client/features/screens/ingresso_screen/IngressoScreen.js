@@ -17,12 +17,12 @@ const IngressoScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [sessions, setSessions] = useState([]);
 
-  const { id: sessionId, price, title, troupe } = route.params;
+  const { id, price, title, troupe } = route.params;
 
   const fetchSessions = async () => {
     setModalOpen(true);
     setLoading(true);
-    const { sessions_attributes } = await getShowById(sessionId);
+    const { sessions_attributes } = await getShowById(id);
     setLoading(false);
     setSessions(sessions_attributes);
     setModalOpen(false);
@@ -30,13 +30,14 @@ const IngressoScreen = ({ route }) => {
 
   const onPressSession = (sessionId) => {
     navigation.navigate('EscolherCadeira', {
-      sessionId
+      sessionId,
+      id
     });
   };
 
   useEffect(() => {
     fetchSessions();
-  }, [sessionId]);
+  }, [id]);
 
   const onSubmit = (selectedChairs) => {
     navigation.navigate('EscolherTicket', {
