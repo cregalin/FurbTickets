@@ -12,18 +12,22 @@ import HomeButtons from './HomeButtons/HomeButtons';
 const HomeScreen = () => {
   const navigation = useNavigation();
 
-  const [open, setOpen] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [shows, setShows] = useState(null);
 
   const fetchShows = async () => {
-    setOpen(true);
-    setLoading(true);
-    const showsResponse = await getShows();
-    setOpen(false);
-    if (!showsResponse) setError(true);
-    else setShows(showsResponse);
+    try {
+      setOpen(true);
+      setLoading(true);
+      const showsResponse = await getShows();
+      setShows(showsResponse);
+      setOpen(false);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
   };
 
   useFocusEffect(
@@ -67,9 +71,10 @@ const HomeScreen = () => {
         </ScrollContainer>
       </Container>
       <HomeButtons
-        onPressAdd={() => navigation.navigate('Cadastrar')}
+        onPressAdd={() => navigation.navigate('CadastrarEspetaculo')}
         onPressRemove={() => {}}
         onPressSearch={() => navigation.navigate('Buscar')}
+        onPressAddRoom={() => navigation.navigate('CadastrarSala')}
       />
     </Fragment>
   );

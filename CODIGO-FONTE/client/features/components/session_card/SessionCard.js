@@ -1,10 +1,18 @@
-import React from "react";
-import { CardContainer, FieldContainer } from "./styles";
-import { StyledText } from "../../components/texts/styles";
-import { darkPurple } from "../../theme/colors";
-import SecondaryButton from "../buttons/secondary_button/SecondaryButton";
+import React from 'react';
+import { CardContainer, FieldContainer } from './styles';
+import { StyledText } from '../../components/texts/styles';
+import { darkPurple } from '../../theme/colors';
+import SecondaryButton from '../buttons/secondary_button/SecondaryButton';
 
-const SessionCard = (props) => {
+const SessionCard = ({
+  index,
+  date,
+  time,
+  roomName,
+  choosing,
+  onPress,
+  id,
+}) => {
   return (
     <CardContainer>
       <StyledText
@@ -13,20 +21,25 @@ const SessionCard = (props) => {
         fontSize={20}
         fontColor={darkPurple}
       >
-        Sessão {props.index + 1}
+        Sessão {index + 1}
       </StyledText>
       <FieldContainer>
         <StyledText fontWeight="bold">Data:</StyledText>
-        <StyledText fontColor={darkPurple}>{props.date}</StyledText>
+        <StyledText fontColor={darkPurple}>{date}</StyledText>
       </FieldContainer>
       <FieldContainer>
         <StyledText fontWeight="bold">Hora:</StyledText>
-        <StyledText fontColor={darkPurple}>{props.time}</StyledText>
+        <StyledText fontColor={darkPurple}>{time}</StyledText>
       </FieldContainer>
-      <SecondaryButton
-        label="Remover"
-        onPress={() => props.onPress(props.index)}
-      />
+      <FieldContainer>
+        <StyledText fontWeight="bold">Sala:</StyledText>
+        <StyledText fontColor={darkPurple}>{roomName}</StyledText>
+      </FieldContainer>
+      {!choosing ? (
+        <SecondaryButton label="Remover" onPress={() => onPress(index)} />
+      ) : (
+        <SecondaryButton label="Comprar" onPress={() => onPress(id)} />
+      )}
     </CardContainer>
   );
 };

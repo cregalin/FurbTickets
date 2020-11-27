@@ -27,15 +27,18 @@ const SpectacleScreen = () => {
   const [sessions, setSessions] = useState(null);
 
   const fetchShow = async () => {
-    setOpen(true);
-    setLoading(true);
-    const { sessions_attributes, show } = await getShow(id);
-    setLoading(false);
-    if (!sessions_attributes && !show) setError(true);
-    else {
+    try {
+      setOpen(true);
+      setLoading(true);
+      const { sessions_attributes, show } = await getShow(id);
       setShow(show);
       setSessions(sessions_attributes);
       setOpen(false);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+      console.log(err0r);
     }
   };
 
@@ -104,6 +107,7 @@ const SpectacleScreen = () => {
                     label="Hora:"
                     value={parseTimeFromPayload(session.time)}
                   />
+                  <RowField label="Sala:" value={session.room_description} />
                 </View>
               );
             })}
@@ -147,7 +151,7 @@ const SpectacleScreen = () => {
           width="90%"
           onPress={() => {
             if (!loading && !error)
-              navigation.navigate('Cadastro_AddSession', {
+              navigation.navigate('CadastrarSessao', {
                 spectacleId: show.id,
                 sessions: sessions,
               });

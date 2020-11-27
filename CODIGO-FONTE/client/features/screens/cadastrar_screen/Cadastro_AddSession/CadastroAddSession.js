@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'react-native';
+import { arrow_icon } from '../../../../assets/images';
+import { Image, Modal, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { putShowSessions } from 'baseServices/ShowService';
@@ -8,7 +9,7 @@ import { parseDateToPayload } from 'helpers';
 import SecondaryButton from 'components/buttons/secondary_button/SecondaryButton';
 import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
 import { StyledText } from 'components/texts/styles';
-import { Container } from 'components/containers/styles';
+import { Container, ScrollContainer } from 'components/containers/styles';
 import SessionCard from 'components/session_card/SessionCard';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
 import { LoaderCard } from 'components/cards/LoaderCard/LoaderCard';
@@ -18,9 +19,13 @@ import {
   parseDateFromPayload,
   parseTimeFromPayload,
 } from '../../../../helpers';
+import { getRooms } from '../../../../services/RoomService';
+import NoControlTextInput from '../../../components/inputs/text_input/NoControlTextInput';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CadastroAddSession = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [sessionModalVisible, setSessionModalVisible] = useState(false);
+  const [roomModalVisible, setRoomModalVisible] = useState(false);
 
   const route = useRoute();
   const navigation = useNavigation();
@@ -30,6 +35,9 @@ const CadastroAddSession = () => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingRooms, setLoadingRooms] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState({ description: '' });
 
   const [currentDate, setDate] = useState('');
   const [currentTime, setTime] = useState('');
@@ -41,6 +49,28 @@ const CadastroAddSession = () => {
       time: '',
     },
   });
+
+  const onSearchRoom = async () => {
+    try {
+      setSessionModalVisible(false);
+      setRoomModalVisible(true);
+      setError(false);
+      setLoadingRooms(true);
+      const { data } = await getRooms();
+      setRooms(data);
+      setLoadingRooms(false);
+    } catch (error) {
+      setOpen(true);
+      setError(true);
+      console.log(error);
+    }
+  };
+
+  const onSelectRoom = (room) => {
+    setSelectedRoom(room);
+    setRoomModalVisible(false);
+    setSessionModalVisible(true);
+  };
 
   useEffect(() => {
     if (sessions && !sessionAttributes.length) {
@@ -55,23 +85,28 @@ const CadastroAddSession = () => {
   }, []);
 
   const onSave = async () => {
-    setOpen(true);
-    setLoading(true);
-    const payloadSessions = sessionAttributes.map((session) => {
-      return {
-        time: session.time,
-        date: parseDateToPayload(session.date),
-      };
-    });
-    putShowSessions(payloadSessions, spectacleId)
-      .then(() => {
+    try {
+      if (selectedRoom.id) {
+        setError(false);
+        setOpen(true);
+        setLoading(true);
+        const payloadSessions = sessionAttributes.map((session) => {
+          return {
+            time: session.time,
+            date: parseDateToPayload(session.date),
+            room_id: selectedRoom.id,
+            room_description: selectedRoom.description,
+          };
+        });
+        await putShowSessions(payloadSessions, spectacleId);
         setLoading(false);
         navigation.navigate('Home');
-      })
-      .catch((error) => {
-        setError(true);
-        console.log(error);
-      });
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      console.log(error);
+    }
   };
 
   const onSubmit = () => {
@@ -80,9 +115,11 @@ const CadastroAddSession = () => {
       {
         date: currentDate,
         time: currentTime,
+        room_id: selectedRoom.id,
+        room_description: selectedRoom.description,
       },
     ]);
-    setModalVisible(false);
+    setSessionModalVisible(false);
     setDate('');
     setTime('');
   };
@@ -96,7 +133,10 @@ const CadastroAddSession = () => {
 
   return (
     <Container>
-      <PrimaryButton label="Adicionar" onPress={() => setModalVisible(true)} />
+      <PrimaryButton
+        label="Adicionar"
+        onPress={() => setSessionModalVisible(true)}
+      />
       <PrimaryButton label="Salvar" onPress={onSave} />
       <LoaderCard
         open={open}
@@ -112,6 +152,7 @@ const CadastroAddSession = () => {
               index={index}
               date={session.date}
               time={session.time}
+              roomName={session.room_description}
               onPress={onDelete}
             />
           ))
@@ -121,7 +162,11 @@ const CadastroAddSession = () => {
           </StyledText>
         )}
       </StyledScrollView>
-      <Modal visible={modalVisible} animationType={'slide'} transparent={true}>
+      <Modal
+        visible={sessionModalVisible}
+        animationType={'slide'}
+        transparent={true}
+      >
         <ModalContainer>
           <InModalContainer>
             <StyledText
@@ -153,11 +198,75 @@ const CadastroAddSession = () => {
               placeholder="Hora..."
               value={currentTime}
             />
+            <NoControlTextInput
+              readOnly={true}
+              placeholder="Sala"
+              onTouch={onSearchRoom}
+              value={selectedRoom.description}
+            />
             <SecondaryButton label="Salvar" onPress={onSubmit} />
             <SecondaryButton
               label="Voltar"
-              onPress={() => setModalVisible(false)}
+              onPress={() => setSessionModalVisible(false)}
             />
+          </InModalContainer>
+        </ModalContainer>
+      </Modal>
+      <Modal
+        visible={roomModalVisible}
+        animationType="slide"
+        transparent={true}
+      >
+        <ModalContainer>
+          <InModalContainer>
+            <StyledText
+              fontWeight="bold"
+              fontSize={20}
+              marginBottom={12}
+              fontColor="black"
+            >
+              Sala
+            </StyledText>
+            <ScrollContainer>
+              {loadingRooms && (
+                <StyledText>Buscando salas cadastradas...</StyledText>
+              )}
+              {rooms && rooms.length ? (
+                rooms.map((room, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={{
+                      width: 350,
+                      borderTopWidth: 1,
+                      borderColor: 'gray',
+                      padding: 5,
+                      marginBottom: 5,
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}
+                    onPress={() => onSelectRoom(room)}
+                  >
+                    <StyledText
+                      fontWeight="bold"
+                      fontSize={20}
+                      fontColor="brown"
+                    >
+                      {room.description}
+                    </StyledText>
+                    <Image source={arrow_icon} />
+                  </TouchableOpacity>
+                ))
+              ) : (
+                <PrimaryButton
+                  label="Cadastrar Sala"
+                  onPress={() => {
+                    setRoomModalVisible(false);
+                    setOpen(false);
+                    navigation.navigate('CadastrarSala');
+                  }}
+                />
+              )}
+            </ScrollContainer>
           </InModalContainer>
         </ModalContainer>
       </Modal>

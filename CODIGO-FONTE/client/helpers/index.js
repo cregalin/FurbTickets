@@ -10,7 +10,9 @@ export function parseDateFromPayload(date) {
 }
 
 export function parseTimeFromPayload(time) {
-  return `${new Date(time).getUTCHours()}:${new Date(time).getUTCMinutes()}`;
+  let minutes = new Date(time).getUTCMinutes();
+  minutes = minutes == 0 ? '00' : minutes;
+  return `${new Date(time).getUTCHours()}:${minutes}`;
 }
 
 export function parseDateToPayload(date) {

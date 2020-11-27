@@ -1,10 +1,10 @@
-import styled from "styled-components/native";
-import { white, electricPurple } from "../../../theme/colors";
+import styled from 'styled-components/native';
+import { white, electricPurple } from '../../../theme/colors';
 
 export const StyledScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })`
   width: 98%;
@@ -12,20 +12,20 @@ export const StyledScrollView = styled.ScrollView.attrs({
 `;
 
 const modalBackground = {
-  background: "rgba(0,0,0,0.7)",
+  background: 'rgba(0,0,0,0.7)',
 };
 
 export const ModalContainer = styled.View`
   height: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  background-color: ${modalBackground.background};
 `;
 
 export const InModalContainer = styled.View`
   width: 99%;
-  height: 40%;
+  height: 50%;
   border-width: 1px;
   background-color: ${white};
   padding: 10px;

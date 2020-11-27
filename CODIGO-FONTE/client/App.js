@@ -6,16 +6,19 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/TicketReducer';
 import mySaga from './saga/saga';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import HomeScreen from './features/screens/home_screen/HomeScreen';
 import EscolherTicket from './features/screens/comprar_ticket/EscolherTicket';
 import BuscarScreen from './features/screens/buscar_screen/BuscarScreen';
 import ShowList from './features/screens/buscar_screen/ShowList';
-import CadastrarScreen from './features/screens/cadastrar_screen/CadastrarScreen';
 import CadastroSala from './features/screens/cadastrar_screen/Cadastro_Sala/CadastroSala';
 import IngressoScreen from './features/screens/ingresso_screen/IngressoScreen';
 import SpectacleScreen from './features/screens/spectacle_screen/SpectacleScreen';
 import { CadastroAddSession } from './features/screens/cadastrar_screen/Cadastro_AddSession/CadastroAddSession';
+import { CadastroView } from './features/screens/cadastrar_screen/Cadastro_View/CadastroView';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
@@ -48,15 +51,15 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Cadastrar"
-            component={CadastrarScreen}
+            name="CadastrarEspetaculo"
+            component={CadastroView}
             options={{
               title: 'Cadastrar Espetáculo',
-              headerTitleAlign: 'right',
+              ...TransitionPresets.SlideFromRightIOS,
             }}
           />
           <Stack.Screen
-            name="CadastroSala"
+            name="CadastrarSala"
             component={CadastroSala}
             options={{
               title: 'Cadastrar Sala',
@@ -88,7 +91,7 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Cadastro_AddSession"
+            name="CadastrarSessao"
             component={CadastroAddSession}
             options={{
               title: 'Sessões',

@@ -24,22 +24,21 @@ const CadastroView = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = ({ description, price, title, troupe }) => {
-    setLoading(true);
-    setError(false);
-    setOpen(true);
-    postShow({ description, price, title, troupe })
-      .then((response) => {
-        setOpen(false);
-        setLoading(false);
-        const showId = response.data.id;
-        navigation.navigate('Cadastro_AddSession', { spectacleId: showId });
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(true);
-        console.log(error);
-      });
+  const onSubmit = async ({ description, price, title, troupe }) => {
+    try {
+      setLoading(true);
+      setError(false);
+      setOpen(true);
+      const { data } = await postShow({ description, price, title, troupe });
+      setOpen(false);
+      setLoading(false);
+      const showId = data.id;
+      navigation.navigate('CadastrarSessao', { spectacleId: showId });
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      console.log(error);
+    }
   };
 
   return (

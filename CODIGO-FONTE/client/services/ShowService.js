@@ -4,7 +4,7 @@ import { mockResponse } from '../mock';
 const axios = require('axios');
 
 const fitubServer = axios.create({
-  baseURL: 'http://fbe2c0c30d3f.ngrok.io',
+  baseURL: 'https://e539c9e54434.ngrok.io/',
   timeout: 3000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
@@ -13,41 +13,77 @@ function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function getShows(params) {
-  // await timeout(800)
-  // return mockResponse
-  let query = paramsToQuery(params);
-  return fitubServer
-    .get(`shows${query ? '?' + query : ''}`)
-    .then((response) => response.data.data);
+export async function getShows() {
+  try {
+    return fitubServer.get('shows').then((response) => response.data.data);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getShowsQuery(params) {
+  try {
+    let query = paramsToQuery(params);
+    return fitubServer
+      .get(`shows${query ? '?' + query : ''}`)
+      .then((response) => response.data.data);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getChairs(sessionId) {
+  try {
+    return fitubServer
+      .get(`sessions/${sessionId}/chairs`)
+      .then((response) => response.data);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export async function getShow(id) {
-  return fitubServer.get(`shows/${id}`).then((response) => response.data);
+  try {
+    return fitubServer.get(`shows/${id}`).then((response) => response.data);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export async function getShowById(id) {
-  return fitubServer.get(`shows/${id}`);
+  try {
+    return fitubServer.get(`shows/${id}`).then((response) => response.data);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export function postShow({ title, description, price, troupe }) {
-  const payload = {
-    show: {
-      title: title,
-      description: description,
-      price: price,
-      troupe: troupe,
-      room_id: 3,
-    },
-  };
-  return fitubServer.post('/shows', payload);
+  try {
+    const payload = {
+      show: {
+        title: title,
+        description: description,
+        price: price,
+        troupe: troupe,
+        room_id: 3,
+      },
+    };
+    return fitubServer.post('/shows', payload);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export function putShowSessions(sessionAttributes, spectacleId) {
-  const payload = {
-    show: {
-      sessions_attributes: sessionAttributes,
-    },
-  };
-  return fitubServer.put(`/shows/${spectacleId}`, payload);
+  try {
+    const payload = {
+      show: {
+        sessions_attributes: sessionAttributes,
+      },
+    };
+    return fitubServer.put(`/shows/${spectacleId}`, payload);
+  } catch (error) {
+    throw new Error(error);
+  }
 }

@@ -7,3 +7,4 @@ export const theater_icon = require('./theater.png');
 export const qrcode_icon = require('./qrcode.png');
 export const ticket_icon = require('./ticket.png');
 export const theater_faces_icon = require('./theater_faces.png');
+export const arrow_icon = require('./right.png');
