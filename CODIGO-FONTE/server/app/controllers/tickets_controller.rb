@@ -8,6 +8,18 @@ class TicketsController < ApplicationController
   def show
   end
 
+  def confirm
+    tickets_amount = 0
+    tickets = []
+
+    ticket_params[:tickets].each do |ticket|
+      show = Show.joins(:sessions).where(sessions: { id: ticket_params[:session_id] } ).first
+      tickets_amount += ticket[:ticket_type] == 1 ? show.price / 2 : show.price
+    end
+
+    render json: { tickets_amount: tickets_amount }, status: :ok
+  end
+
   def create
     customer = Customer.find_or_create_by({ cpf: ticket_params[:cpf], email: ticket_params[:email] })
     tickets = []
@@ -45,11 +57,7 @@ class TicketsController < ApplicationController
   def validate
     ticket = Ticket.where(code: params[:code])
 
-    if ticket.count > 0
-      render json: { message: 'Ticket validado com sucesso' }, status: :ok
-    else
-      render json: { message: 'Esse ticket não é válido'}, status: :unprocessable_entity
-    end
+    render json: { valid: ticket.count > 0 }, status: :ok
   end
 
   private

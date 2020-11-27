@@ -2,8 +2,8 @@ class ShowsController < ApplicationController
   def index
     @shows = Show
       .select('shows.id, shows.title, shows.description, shows.price, sessions.room_id session_room_id, shows.troupe')
-      .distinct
       .joins(:sessions)
+      .group("shows.id")
       .by_title(params[:title])
       .by_description(params[:description])
       .by_troupe(params[:troupe])
@@ -16,7 +16,7 @@ class ShowsController < ApplicationController
   def show
     @show = Show.joins(:sessions).find(params[:id])
 
-    render json: { show: @show, sessions_attributes: @show.sessions }
+    render json: { show: @show, sessions_attributes: @show.sessions.map { |session| {id: session.id, show_id: session.show_id, date: session.date, time: session.time, room_id: session.room_id, room_description: session&.room&.description } } }
   end
 
   def create
