@@ -16,7 +16,7 @@ const LoaderCard = ({
   return (
     <Modal
       visible={open && (loading || error)}
-      animationType="fade"
+      animationType="slide"
       transparent={true}
       style={{
         justifyContent: 'flex-end',

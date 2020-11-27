@@ -36,7 +36,6 @@ export async function getChairs(sessionId) {
 }
 
 export async function getShowById(id) {
-  console.log(id);
   try {
     return fitubServer.get(`shows/${id}`).then((response) => response.data);
   } catch (error) {

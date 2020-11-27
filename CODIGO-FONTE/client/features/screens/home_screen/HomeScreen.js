@@ -22,8 +22,9 @@ const HomeScreen = () => {
       setOpen(true);
       setLoading(true);
       const showsResponse = await getShows();
-      setShows(showsResponse);
       setOpen(false);
+      setLoading(false);
+      setShows(showsResponse);
     } catch (error) {
       setError(true);
       console.log(error);
