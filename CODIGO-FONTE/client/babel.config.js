@@ -20,6 +20,7 @@ module.exports = function(api) {
         ],
         alias: {
           helpers: './helpers',
+          assets: './assets',
           components: './features/components',
           constants: './features/constants',
           models: './features/models',

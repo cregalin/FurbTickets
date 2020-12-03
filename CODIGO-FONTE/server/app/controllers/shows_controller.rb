@@ -1,10 +1,9 @@
 class ShowsController < ApplicationController
-  before_action :set_show, only: [:show, :update, :destroy]
-
   def index
     @shows = Show
-      .select('shows.id, shows.title, shows.description, shows.price, shows.room_id, shows.troupe, sessions.id session_id, sessions.date session_date, sessions.time session_time')
+      .select('shows.id, shows.title, shows.description, shows.price, sessions.room_id session_room_id, shows.troupe')
       .joins(:sessions)
+      .group("shows.id")
       .by_title(params[:title])
       .by_description(params[:description])
       .by_troupe(params[:troupe])
@@ -15,7 +14,9 @@ class ShowsController < ApplicationController
   end
 
   def show
-    render json: { show: @show, sessions_attributes: @show.sessions }
+    @show = Show.joins(:sessions).find(params[:id])
+
+    render json: { show: @show, sessions_attributes: @show.sessions.map { |session| {id: session.id, show_id: session.show_id, date: session.date, time: session.time, room_id: session.room_id, room_description: session&.room&.description } } }
   end
 
   def create
@@ -29,6 +30,8 @@ class ShowsController < ApplicationController
   end
 
   def update
+    @show = Show.find(params[:id])
+
     if @show.update(show_params)
       render json: @show
     else
@@ -37,14 +40,12 @@ class ShowsController < ApplicationController
   end
 
   def destroy
+    @show = Show.joins(:sessions).find(params[:id])
+
     @show.destroy
   end
 
   private
-    def set_show
-      @show = Show.joins(:sessions).find(params[:id])
-    end
-
     def show_params
       params.require(:show).permit(:title, :description, :price, :troupe, sessions_attributes: [:room_id, :date, :time, :id, :destroy])
     end

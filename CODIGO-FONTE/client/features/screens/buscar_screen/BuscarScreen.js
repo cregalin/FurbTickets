@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import NoControlTextInput from 'components/inputs/text_input/NoControlTextInput';
+import React, { Fragment, useState } from 'react';
 import { Button } from 'react-native';
-import * as S from './styles';
+import { Label } from './styles';
 import StyledMaskTextInput from 'components/inputs/text_mask_input/MaskTextInput';
 import PrimaryButton from 'components/buttons/primary_button/PrimaryButton';
-import { Container } from 'components/containers/styles';
+import { ScrollContainer, Container } from 'components/containers/styles';
 import { useNavigation } from '@react-navigation/native';
 import { Title } from 'components/texts/styles';
 import { parseDateToPayload } from 'helpers';
@@ -35,64 +34,65 @@ const BuscarScreen = () => {
   };
 
   return (
-    <Container>
-      <Title>Busque espetáculos.</Title>
-      <S.GridContainer>
-        <PrimaryButton onPress={searchSpectacles} label="Buscar" />
-        <S.Label>Título</S.Label>
-        <NoControlTextInput
-          placeholder="Titulo"
-          name="title"
-          onChangeText={(text) => setTitle(text)}
-        />
+    <Fragment>
+      <Container height="90%">
+        <ScrollContainer>
+          <Label>Título</Label>
+          <NoControlTextInput
+            placeholder="Titulo"
+            name="title"
+            onChangeText={(text) => setTitle(text)}
+          />
 
-        <S.Label>Descrição</S.Label>
-        <NoControlTextInput
-          placeholder="Descrição"
-          name="description"
-          onChangeText={(text) => setDescription(text)}
-        />
+          <Label>Descrição</Label>
+          <NoControlTextInput
+            placeholder="Descrição"
+            name="description"
+            onChangeText={(text) => setDescription(text)}
+          />
 
-        <S.Label>Trupe</S.Label>
-        <NoControlTextInput
-          placeholder="Trupe"
-          name="troupe"
-          onChangeText={(text) => setTroupe(text)}
-        />
+          <Label>Trupe</Label>
+          <NoControlTextInput
+            placeholder="Trupe"
+            name="troupe"
+            onChangeText={(text) => setTroupe(text)}
+          />
 
-        <S.Label>De dia:</S.Label>
-        <StyledMaskTextInput
-          maskType="datetime"
-          format="DD/MM/YYYY"
-          value={dateFrom}
-          onChangeText={(text) => setDateFrom(dateFrom)}
-        />
+          <Label>De dia:</Label>
+          <StyledMaskTextInput
+            maskType="datetime"
+            format="DD/MM/YYYY"
+            value={dateFrom}
+            onChangeText={(text) => setDateFrom(dateFrom)}
+          />
 
-        <S.Label>Até Dia</S.Label>
-        <StyledMaskTextInput
-          maskType="datetime"
-          format="DD/MM/YYYY"
-          value={dateTo}
-          onChangeText={(text) => setDateTo(dateTo)}
-        />
+          <Label>Até Dia</Label>
+          <StyledMaskTextInput
+            maskType="datetime"
+            format="DD/MM/YYYY"
+            value={dateTo}
+            onChangeText={(text) => setDateTo(dateTo)}
+          />
 
-        <S.Label>Hora mínima:</S.Label>
-        <StyledMaskTextInput
-          maskType={'datetime'}
-          format="HH:mm"
-          value={timeFrom}
-          onChangeText={(text) => setTimeFrom(timeFrom)}
-        />
+          <Label>Hora mínima:</Label>
+          <StyledMaskTextInput
+            maskType={'datetime'}
+            format="HH:mm"
+            value={timeFrom}
+            onChangeText={(text) => setTimeFrom(timeFrom)}
+          />
 
-        <S.Label>Hora máxima:</S.Label>
-        <StyledMaskTextInput
-          maskType={'datetime'}
-          format="HH:mm"
-          value={timeTo}
-          onChangeText={(text) => setTimeTo(timeTo)}
-        />
-      </S.GridContainer>
-    </Container>
+          <Label>Hora máxima:</Label>
+          <StyledMaskTextInput
+            maskType={'datetime'}
+            format="HH:mm"
+            value={timeTo}
+            onChangeText={(text) => setTimeTo(timeTo)}
+          />
+        </ScrollContainer>
+        <PrimaryButton onPress={searchSpectacles} label="Buscar" width="90%" />
+      </Container>
+    </Fragment>
   );
 };
 

@@ -1,21 +1,246 @@
 [{
-	"reference": "A",
-	"status": "1",
+	"reference": "A1",
+	"status": "2",
 	"position_x": "0",
 	"position_y": "0"
 }, {
-	"reference": "B",
-	"status": "1",
+	"reference": "B1",
+	"status": "2",
 	"position_x": "0",
 	"position_y": "1"
 }, {
-	"reference": "C",
+	"reference": "C1",
+	"status": "2",
+	"position_x": "0",
+	"position_y": "2"
+}, {
+	"reference": "D1",
+	"status": "2",
+	"position_x": "0",
+	"position_y": "3"
+}, {
+	"reference": "E1",
+	"status": "1",
+	"position_x": "0",
+	"position_y": "4"
+}, {
+	"reference": "F1",
+	"status": "1",
+	"position_x": "0",
+	"position_y": "5"
+}, {
+	"reference": "G1",
+	"status": "1",
+	"position_x": "0",
+	"position_y": "6"
+}, {
+	"reference": "A2",
 	"status": "1",
 	"position_x": "1",
 	"position_y": "0"
 }, {
-	"reference": "D",
+	"reference": "B2",
 	"status": "1",
 	"position_x": "1",
 	"position_y": "1"
+}, {
+	"reference": "C2",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "2"
+}, {
+	"reference": "D2",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "3"
+}, {
+	"reference": "E2",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "4"
+}, {
+	"reference": "F2",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "5"
+}, {
+	"reference": "G2",
+	"status": "1",
+	"position_x": "1",
+	"position_y": "6"
+}, {
+	"reference": "A3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "0"
+}, {
+	"reference": "B3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "1"
+}, {
+	"reference": "C3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "2"
+}, {
+	"reference": "D3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "3"
+}, {
+	"reference": "E3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "4"
+}, {
+	"reference": "F3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "5"
+}, {
+	"reference": "G3",
+	"status": "1",
+	"position_x": "2",
+	"position_y": "6"
+}, {
+	"reference": "A4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "0"
+}, {
+	"reference": "B4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "1"
+}, {
+	"reference": "C4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "2"
+}, {
+	"reference": "D4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "3"
+}, {
+	"reference": "E4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "4"
+}, {
+	"reference": "F4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "5"
+}, {
+	"reference": "G4",
+	"status": "1",
+	"position_x": "3",
+	"position_y": "6"
+}, {
+	"reference": "A5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "0"
+}, {
+	"reference": "B5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "1"
+}, {
+	"reference": "C5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "2"
+}, {
+	"reference": "D5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "3"
+}, {
+	"reference": "E5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "4"
+}, {
+	"reference": "F5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "5"
+}, {
+	"reference": "G5",
+	"status": "1",
+	"position_x": "4",
+	"position_y": "6"
+}, {
+	"reference": "A6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "0"
+}, {
+	"reference": "B6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "1"
+}, {
+	"reference": "C6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "2"
+}, {
+	"reference": "D6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "3"
+}, {
+	"reference": "E6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "4"
+}, {
+	"reference": "F6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "5"
+}, {
+	"reference": "G6",
+	"status": "1",
+	"position_x": "5",
+	"position_y": "6"
+}, {
+	"reference": "A7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "0"
+}, {
+	"reference": "B7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "1"
+}, {
+	"reference": "C7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "2"
+}, {
+	"reference": "D7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "3"
+}, {
+	"reference": "E7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "4"
+}, {
+	"reference": "F7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "5"
+}, {
+	"reference": "G7",
+	"status": "1",
+	"position_x": "6",
+	"position_y": "6"
 }]

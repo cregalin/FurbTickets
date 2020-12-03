@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { getShows } from 'baseServices/ShowService';
 import { useNavigation } from '@react-navigation/native';
@@ -11,53 +12,72 @@ import HomeButtons from './HomeButtons/HomeButtons';
 const HomeScreen = () => {
   const navigation = useNavigation();
 
-  const [open, setOpen] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [shows, setShows] = useState(null);
 
   const fetchShows = async () => {
-    setOpen(true);
-    setLoading(true);
-    const showsResponse = await getShows();
-    setOpen(false);
-    if (!showsResponse) setError(true);
-    else setShows(showsResponse);
+    try {
+      setOpen(true);
+      setLoading(true);
+      const showsResponse = await getShows();
+      setOpen(false);
+      setLoading(false);
+      setShows(showsResponse);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
   };
 
-  useEffect(() => {
-    fetchShows();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      let isActive = true;
+
+      fetchShows();
+
+      return () => {
+        isActive = false;
+      };
+    }, [])
+  );
 
   return (
-    <Container>
+    <Fragment>
+      <Container height="90%">
+        <ScrollContainer>
+          {open ? (
+            <LoaderCard
+              text="Buscando sessões..."
+              error={error}
+              loading={loading}
+              onCloseModal={() => setOpen(false)}
+              open={open}
+            />
+          ) : (
+            shows?.map((show, index) => {
+              return (
+                <ShowCard
+                  key={index}
+                  show={show}
+                  onPressTicket={(show) =>
+                    navigation.navigate('Ingresso', show)
+                  }
+                  onPressDetails={(show) => navigation.navigate('Show', show)}
+                />
+              );
+            })
+          )}
+        </ScrollContainer>
+      </Container>
       <HomeButtons
-        onPressAdd={() => navigation.navigate('Cadastrar')}
-        onPressRemove={() => {}}
+        onPressAdd={() => navigation.navigate('CadastrarEspetaculo')}
+        onPressValidate={() => navigation.navigate('Validar')}
         onPressSearch={() => navigation.navigate('Buscar')}
+        onPressAddRoom={() => navigation.navigate('CadastrarSala')}
       />
-      <ScrollContainer>
-        {open ? (
-          <LoaderCard
-            text="Buscando sessões..."
-            error={error}
-            loading={loading}
-            onCloseModal={() => setOpen(false)}
-            open={open}
-          />
-        ) : (
-          shows?.map((show, index) => {
-            return (
-              <ShowCard
-                key={index}
-                show={show}
-                onPressTicket={(show) => navigation.navigate('Ingresso', show)}
-              />
-            );
-          })
-        )}
-      </ScrollContainer>
-    </Container>
+    </Fragment>
   );
 };
 

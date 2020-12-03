@@ -7,4 +7,5 @@ export const StyledLoaderCard = styled.View`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
